@@ -13,9 +13,9 @@ public class HomeController {
         return "index";
     }
 
-    @GetMapping("/map")
-    public String mapView(){
+    @GetMapping("/viewcharts")
+    public String chartsView(){
 
-        return "map";
+        return "pages/chart";
     }
 }
