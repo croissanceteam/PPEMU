@@ -351,6 +351,19 @@
                         <li class="active"><a href="i#"><i class="fa fa-circle-o"></i>Données graphiques</a></li>
                     </ul>
                 </li>
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-dashboard"></i> <span>Evaluations</span>
+                        <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li class="active"><a href="#"><i class="fa fa-circle-o"></i>Des préstataires</a></li>
+                        <li><a href="/contractors"><i class="fa fa-circle-o"></i>Des controlleurs</a></li>
+
+                    </ul>
+                </li>
                 <li class="treeview" style="display: none;">
                     <a href="#">
                         <i class="fa fa-files-o"></i>
@@ -519,7 +532,7 @@
         <section class="content-header">
             <h1>
                 Tableau de bord
-                <small>Données géographiques</small>
+                <small>Données graphiques</small>
             </h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Accueil</a></li>
@@ -534,7 +547,7 @@
                     <!-- small box -->
                     <div class="small-box bg-aqua">
                         <div class="inner">
-                            <h3 id="countReperage" style="font-weight: lighter"></h3>
+                            <h3 id="countReperage" style="font-weight: lighter">Chargement ..</h3>
 
                             <p>Parcelles référencées </p>
                         </div>
@@ -549,15 +562,15 @@
                     <!-- small box -->
                     <div class="small-box bg-green">
                         <div class="inner">
-                            <h3 id="percentRea" style="font-weight: lighter;"></h3>
+                            <h3 id="percentRea" style="font-weight: lighter;">Chargement .. </h3>
 
-                            <p><span id="countRealized" style="font-weight: bold;">67</span> Branchements réalisés</p>
+                            <p><span id="countRealized" style="font-weight: bold;"></span> Branchements réalisés</p>
 
                         </div>
                         <div class="icon">
                             <i class="fa fa-check-circle"></i>
                         </div>
-                        <a href="#" class="small-box-footer">Voir plus <i class="fa fa-arrow-circle-right"></i></a>
+                        <a href="/viewtables/realized" class="small-box-footer">Voir plus <i class="fa fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
                 <!-- ./col -->
@@ -565,14 +578,14 @@
                     <!-- small box -->
                     <div class="small-box bg-yellow">
                         <div class="inner">
-                            <h3 id="percentErr" style="font-weight: lighter;"></h3>
+                            <h3 id="percentErr" style="font-weight: lighter;">Chargement ...</h3>
 
                             <p><span id="countError" style="font-weight: bold;"></span> Réalisations sans référencement</p>
                         </div>
                         <div class="icon">
                             <i class="fa fa-trash"></i>
                         </div>
-                        <a href="#" class="small-box-footer">Voir plus <i class="fa fa-arrow-circle-right"></i></a>
+                        <a href="/viewtables/errors" class="small-box-footer">Voir plus <i class="fa fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
                 <!-- ./col -->
@@ -580,20 +593,20 @@
                     <!-- small box -->
                     <div class="small-box bg-red">
                         <div class="inner">
-                            <h3 id="percentRep" style="font-weight: lighter;"></h3>
+                            <h3 id="percentRep" style="font-weight: lighter;">Chargement ..</h3>
 
                             <p><span id="countRepProgress" style="font-weight: bold;"></span> Branchements non réalisés</p>
                         </div>
                         <div class="icon">
                             <i class="fa fa-hourglass-half"></i>
                         </div>
-                        <a href="#" class="small-box-footer">Voir plus <i class="fa fa-arrow-circle-right"></i></a>
+                        <a href="/viewtables/tasks" class="small-box-footer">Voir plus <i class="fa fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
                 <!-- ./col -->
             </div>
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-6" style="display:none;">
                     <!-- AREA CHART -->
                     <div class="box box-primary">
                         <div class="box-header with-border">
@@ -638,7 +651,7 @@
                     <!-- LINE CHART -->
                     <div class="box box-info">
                         <div class="box-header with-border">
-                            <h3 class="box-title">Line Chart</h3>
+                            <h3 class="box-title">Progression des tâches</h3>
 
                             <div class="box-tools pull-right">
                                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -658,7 +671,7 @@
                     <!-- BAR CHART -->
                     <div class="box box-success">
                         <div class="box-header with-border">
-                            <h3 class="box-title">Bar Chart</h3>
+                            <h3 class="box-title">Données par LOT</h3>
 
                             <div class="box-tools pull-right">
                                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>

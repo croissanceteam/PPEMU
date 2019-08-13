@@ -325,7 +325,12 @@
       <!-- search form -->
       <form action="#" method="get" class="sidebar-form">
         <div class="input-group">
-          <input type="text" name="q" class="form-control" placeholder="Rechercher...">
+          <input type="text" name="q" list="towns" ng-change="filterTown()" ng-model="filter" class="form-control" placeholder="Rechercher...">
+          <datalist id="towns">
+            <option value="Kinshasa">
+            <option value="Katanga">
+            <option value="Kongo Central">
+          </datalist>
           <span class="input-group-btn">
                 <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
                 </button>
@@ -338,16 +343,31 @@
         <li class="header">MENU DE NAVIGATION</li>
         <li class="active treeview">
           <a href="#">
-            <i class="fa fa-dashboard"></i> <span>Graphiques et SIG</span>
+            <i class="fa fa-dashboard"></i> <span>Visualiser les données</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
-            <li class="active"><a href="#"><i class="fa fa-circle-o"></i>Données géographiques</a></li>
-            <li><a href="/viewcharts"><i class="fa fa-circle-o"></i>Données graphiques</a></li>
+            <li class="active"><a href="#"><i class="fa fa-circle-o"></i>Dans une map</a></li>
+            <li><a href="/viewcharts"><i class="fa fa-circle-o"></i>Dans des graphiques</a></li>
           </ul>
         </li>
+
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-dashboard"></i> <span>Evaluations</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li class="active"><a href="#"><i class="fa fa-circle-o"></i>Des préstataires</a></li>
+            <li><a href="/contractors"><i class="fa fa-circle-o"></i>Des controlleurs</a></li>
+          </ul>
+        </li>
+
+
         <li class="treeview" style="display: none;">
           <a href="#">
             <i class="fa fa-files-o"></i>
@@ -532,7 +552,7 @@
           <!-- small box -->
           <div class="small-box bg-aqua">
             <div class="inner">
-              <h3 id="countReperage" style="font-weight: lighter"></h3>
+              <h3 id="countReperage" style="font-weight: lighter">Chargement ..</h3>
 
               <p>Parcelles référenceés</p>
             </div>
@@ -547,15 +567,15 @@
           <!-- small box -->
           <div class="small-box bg-green">
             <div class="inner">
-              <h3 id="percentRea" style="font-weight: lighter;"></h3>
+              <h3 id="percentRea" style="font-weight: lighter;">Chargement ..</h3>
 
-              <p><span id="countRealized" style="font-weight: bold;">67</span> Branchements réalisés</p>
+              <p><span id="countRealized" style="font-weight: bold;"></span> Branchements réalisés</p>
 
             </div>
             <div class="icon">
               <i class="fa fa-check-circle"></i>
             </div>
-            <a href="#" class="small-box-footer">Voir plus <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="viewtables/realized" class="small-box-footer">Voir plus <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <!-- ./col -->
@@ -563,14 +583,14 @@
           <!-- small box -->
           <div class="small-box bg-yellow">
             <div class="inner">
-              <h3 id="percentErr" style="font-weight: lighter;"></h3>
+              <h3 id="percentErr" style="font-weight: lighter;">Chargement ..</h3>
 
               <p><span id="countError" style="font-weight: bold;"></span> Réalisations sans référencement</p>
             </div>
             <div class="icon">
               <i class="fa fa-trash"></i>
             </div>
-            <a href="#" class="small-box-footer">Voir plus <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="/viewtables/errors" class="small-box-footer">Voir plus <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <!-- ./col -->
@@ -578,14 +598,16 @@
           <!-- small box -->
           <div class="small-box bg-red">
             <div class="inner">
-              <h3 id="percentRep" style="font-weight: lighter;"></h3>
+              <h3 id="percentRep" style="font-weight: lighter;">Chargement ..</h3>
 
-              <p><span id="countRepProgress" style="font-weight: bold;"></span> Branchements non réalisés</p>
+              <p><span id="countRepProgress" style="font-weight: bold;"></span>
+                Branchements non réalisés
+              </p>
             </div>
             <div class="icon">
               <i class="fa fa-hourglass-half"></i>
             </div>
-            <a href="#" class="small-box-footer">Voir plus <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="/viewtables/tasks" class="small-box-footer">Voir plus <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <!-- ./col -->
@@ -848,6 +870,7 @@
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="/dist/js/pages/dashboard.js"></script>
 <!-- AdminLTE for demo purposes -->
+<script src="/dist/js/shapefile.js"></script>
 <script src="/dist/js/demo.js"></script>
 <script src="/dist/js/angular.min.js"></script>
 <script src="/dist/js/analyze.js"></script>

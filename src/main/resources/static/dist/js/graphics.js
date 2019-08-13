@@ -11,6 +11,7 @@ app.controller('dashboard',function ($scope,$http) {
         var percentage_Rep=0;
         var percentage_Err=0;
         var streets=[];
+        var secteurs=[];
         var datasets=[];
         var currentDataSetRef=[];
         var currentDataSetRea=[];
@@ -252,12 +253,16 @@ app.controller('dashboard',function ($scope,$http) {
                 }
 
                 if (streetCurrent==''){
-                    streetCurrent=d.street.toString().trim();
+                    streetCurrent="Lot "+d.lot.toString().trim();
                     streets.push(streetCurrent);
+                    if(d.secteur!=""){
+                    	secteurs.push(d.secteur);
+                    }
+                    
                     console.log('1er Streer :',streetCurrent);
 
                 }else {
-                    if (streetCurrent!=d.street.toString().trim()){
+                    if (streetCurrent!=("Lot "+d.lot.toString().trim())){
 
                         currentDataSetRef.push(ctrRepGraph);
                         currentDataSetRea.push(ctrReaGraph);
@@ -265,8 +270,9 @@ app.controller('dashboard',function ($scope,$http) {
                         ctrRepGraph=0;
                         ctrReaGraph=0;
                         //currentDataSetRR=[];
-                        streetCurrent=d.street.toString().trim();
+                        streetCurrent="Lot "+d.lot.toString().trim();
                         streets.push(streetCurrent);
+                        secteurs.push(d.secteur);
                         console.log('Current Street :',streetCurrent)
 
                     }
@@ -290,27 +296,27 @@ app.controller('dashboard',function ($scope,$http) {
 
 
             document.querySelector('#countRealized').innerHTML=ctrRea;
-            document.querySelector('#percentRea').innerHTML=parseInt(percentage_Rea)+" %";
+            document.querySelector('#percentRea').innerHTML=Math.round(percentage_Rea)+" %";
             document.querySelector('#countRepProgress').innerHTML=ctrRep
-            document.querySelector('#percentRep').innerHTML=parseInt(percentage_Rep)+" %";
+            document.querySelector('#percentRep').innerHTML=Math.round(percentage_Rep)+" %";
             var currentStreet='';
                 rep.error.forEach(function(e,i){
-
+                	//console.log("Error unit :",e);
                     if (e.idRep==null){
 
                         ctrErr+=1;
                         ctrErrGraph+=1;
-                        console.log("Commune :",e.street);
+                        console.log("Commune :",e.lot);
                         if (currentStreet==''){
-                            currentStreet=e.street;
+                            currentStreet="Lot "+e.lot;
                         }else {
-                            if (currentStreet!=e.street.toString().trim()){
+                            if (currentStreet!=("Lot "+e.lot.toString().trim())){
                                 //currentDataSetErr.push(currentStreet);
                                 currentDataSetErr.push(ctrErrGraph);
                                 // datasets.push(currentDataSetRR);
                                 ctrErrGraph=0;
                                 //currentDataSetRR=[];
-                                currentStreet=e.street.toString().trim();
+                                currentStreet=e.lot.toString().trim();
 
                             }
                         }
@@ -322,6 +328,13 @@ app.controller('dashboard',function ($scope,$http) {
                 ctrErrGraph=0;
                 //currentDataSetRR=[];
             }
+            if(currentDataSetRef.length>currentDataSetErr.length){
+            	var iterator=currentDataSetRef.length-currentDataSetErr.length;
+            	for(var i=0;i<iterator;i++){
+            		currentDataSetErr.push(0);
+            	}
+            }
+            console.log('Secteurs :',secteurs)
             console.log('DataSet ErrorS :',currentDataSetErr);
 
             percentage_Err=(ctrErr*100)/parseInt($scope.list[0].done.length);

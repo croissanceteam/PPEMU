@@ -80,7 +80,7 @@ public class Reperage implements Serializable {
     @Column(name="comments")
     private String comments;
 
-    @Column(name="submissions_time")
+    @Column(name="submission_time")
     private String submission_time;
 
     @Column(name="town")
@@ -91,6 +91,15 @@ public class Reperage implements Serializable {
 
     @Column(name="date_export")
     private String date_export;
+
+    @Column(name = "secteur")
+    private String secteur;
+
+    @Column(name="matching")
+    private boolean matching;
+
+    @Column(name = "error_matching")
+    private boolean errorMatching;
 
     public Long getId() {
         return id;
