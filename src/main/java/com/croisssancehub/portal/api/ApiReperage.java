@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -49,5 +50,15 @@ public class ApiReperage {
     @GetMapping("/category/{category}")
     public List<Reperage> getReperageByCategory(@PathVariable String category){
         return reperageRepository.findByCategory(category);
+    }
+
+    @GetMapping("all")
+    public List<Map<String,Object>> getAll(){
+        return reperageRepository.getReperage();
+    }
+
+    @GetMapping("todo")
+    public List<Map<String,Object>> getAllToDo(){
+        return reperageRepository.getReperageToDo();
     }
 }

@@ -3,6 +3,7 @@ package com.croisssancehub.portal.api;
 import com.croisssancehub.portal.models.Realisation;
 import com.croisssancehub.portal.models.ViewRepRea;
 import com.croisssancehub.portal.repositories.RealisationRepository;
+import com.croisssancehub.portal.repositories.ReperageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,6 +18,8 @@ public class ApiRealisation {
 
     @Autowired
     private RealisationRepository realisationRepository;
+    @Autowired
+    ReperageRepository reperageRepository;
 
     @GetMapping("/list")
     public List<Realisation> getRealization(){
@@ -75,6 +78,10 @@ public class ApiRealisation {
         Map<String,List<Map<String,Object>>> tabUnique=new HashMap<>();
         tabUnique.put("done",realisationRepository.doneWork());
         tabUnique.put("error",realisationRepository.doneWorkError());
+        tabUnique.put("reperage",reperageRepository.getReperage());
+        tabUnique.put("realized",realisationRepository.doneWorkRealized());
+        tabUnique.put("realizederrors",realisationRepository.doneWorkRealizedError());
+        tabUnique.put("reperagetodo",reperageRepository.getReperageToDo());
         tabs.add(tabUnique);
         return tabs;
     }

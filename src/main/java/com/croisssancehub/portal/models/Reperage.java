@@ -34,6 +34,7 @@ public class Reperage implements Serializable {
         this.town = town;
         this.lot = lot;
         this.date_export = date_export;
+
     }
 
     @Column(name="name_client")
@@ -94,12 +95,6 @@ public class Reperage implements Serializable {
 
     @Column(name = "secteur")
     private String secteur;
-
-    @Column(name="matching")
-    private boolean matching;
-
-    @Column(name = "error_matching")
-    private boolean errorMatching;
 
     public Long getId() {
         return id;

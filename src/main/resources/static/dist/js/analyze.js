@@ -79,7 +79,7 @@ app.controller('dashboard',function ($scope,$http) {
 
     */
     L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
-        maxZoom: 18,
+        maxZoom: 25,
         attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
             '<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
             'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
@@ -100,19 +100,49 @@ app.controller('dashboard',function ($scope,$http) {
         var percentage_Rea=0;
         var percentage_Rep=0;
         var percentage_Err=0;
-        document.querySelector('#countReperage').innerHTML=$scope.list[0].done.length;
-        console.log('Size :',$scope.list[0].done.length);
+        document.querySelector('#countReperage').innerHTML=$scope.list[0].reperage.length;
+        console.log("Datas :",$scope.list[0].realized)
+        $scope.list[0].realized.forEach(function(d,i){
+            var marker=L.marker([d.latitude, d.longitude],{icon:myIcon}).addTo($scope. mymap)
+             marker.valueOf()._icon.style.backgroundColor = 'darkgreen';
+             marker.bindPopup("Numéro du client :<b>"+d.RefClient+"</b><br/>Nom du client :<b>"+d.nameClient+"</b>");
+             marker.bindPopup($scope.popupHTML(d.nameClient,d.RefClient,d.category,d.submissiontime,d.secteur,d.entreprise,d.controller_name,'green'),{maxWidth:300});
+             marker.valueOf()._icon.style.borderRadius ='2em';
+             marker.valueOf()._icon.style.boxShadow ='0.5px 0.5px 0.5px 0.5px white';
+        });
+        $scope.list[0].realizederrors.forEach(function(e,i){
+             var marker=L.marker([e.latitude, e.longitude],{icon:myIcon}).addTo($scope. mymap)
+              marker.valueOf()._icon.style.backgroundColor = 'darkorange';
+              marker.bindPopup($scope.popupHTML(e.client,e.RefClient,e.category,e.submissiontime,e.secteur,e.entreprise,e.contractor,'yellow'),{maxWidth:300});
+              marker.valueOf()._icon.style.borderRadius ='2em';
+              marker.valueOf()._icon.style.boxShadow ='0.5px 0.5px 0.5px 0.5px white';
 
+        });
+        $scope.list[0].reperagetodo.forEach(function(d,i){
+            var marker=L.marker([d.latitude, d.longitude],{icon:myIcon}).addTo($scope. mymap)
+                marker.valueOf()._icon.style.backgroundColor = 'darkred';
+                marker.bindPopup($scope.popupHTML(d.nameClient,d.ClientRep,d.category,d.submission_time,d.secteur,null,d.controller_name,'red'),{maxWidth:300});
+                marker.valueOf()._icon.style.borderRadius ='2em';
+                marker.valueOf()._icon.style.boxShadow ='0.5px 0.5px 0.5px 0.5px white';
+        })
+        percentage_Rea=($scope.list[0].realized.length*100)/parseInt($scope.list[0].reperage.length);
+         percentage_Rep=(($scope.list[0].reperage.length-$scope.list[0].realized.length)*100)/parseInt($scope.list[0].reperage.length);
+        document.querySelector('#countRealized').innerHTML=$scope.list[0].realized.length;
+        document.querySelector('#percentRea').innerHTML=Math.round(percentage_Rea)+" %";
+        document.querySelector('#countRepProgress').innerHTML=$scope.list[0].reperage.length-$scope.list[0].realized.length;
+       document.querySelector('#percentRep').innerHTML=Math.round(percentage_Rep)+" %";
+
+                    percentage_Err=($scope.list[0].realizederrors.length*100)/parseInt($scope.list[0].reperage.length);
+                   document.querySelector('#countError').innerHTML=$scope.list[0].realizederrors.length;
+                   document.querySelector('#percentErr').innerHTML=Math.round(percentage_Err)+" %";
+/*
         $scope.list.forEach(function (rep,index) {
 
             rep.done.forEach(function (d,i) {
                 var marker=L.marker([d.latitude, d.longitude],{icon:myIcon}).addTo($scope. mymap)
 
                 if (d.entreprise!=null){
-                    marker.valueOf()._icon.style.backgroundColor = 'darkgreen';
-                    marker.bindPopup("Numéro du client :<b>"+d.RefClient+"</b><br/>Nom du client :<b>"+d.nameClient+"</b>");
-                    ctrRea+=1;
-                        marker.bindPopup($scope.popupHTML(d.nameClient,d.RefClient,d.category,d.submissiontime,d.secteur,d.entreprise,d.controller_name,'green'),{maxWidth:300});
+
                 } else{
                     marker.valueOf()._icon.style.backgroundColor = 'darkred';
                  //  marker.bindPopup("Nom du client :<b>"+d.nameClient+"</b>");
@@ -121,33 +151,22 @@ app.controller('dashboard',function ($scope,$http) {
 
                 }
 
-                marker.valueOf()._icon.style.borderRadius ='2em';
-                marker.valueOf()._icon.style.boxShadow ='0.5px 0.5px 0.5px 0.5px white';
-            });
-            percentage_Rea=(ctrRea*100)/parseInt($scope.list[0].done.length);
-            percentage_Rep=(ctrRep*100)/parseInt($scope.list[0].done.length);
 
-            document.querySelector('#countRealized').innerHTML=ctrRea;
-            document.querySelector('#percentRea').innerHTML=Math.round(percentage_Rea)+" %";
-            document.querySelector('#countRepProgress').innerHTML=ctrRep
-            document.querySelector('#percentRep').innerHTML=Math.round(percentage_Rep)+" %";
+            });
+
+
+
             rep.error.forEach(function(e,i){
                 if (e.idRep==null){
                     //console.log('Error :',e);
-                    var marker=L.marker([e.latitude, e.longitude],{icon:myIcon}).addTo($scope. mymap)
-                    marker.valueOf()._icon.style.backgroundColor = 'darkorange';
-                    marker.bindPopup($scope.popupHTML(e.client,e.RefClient,e.category,e.submissiontime,e.secteur,e.entreprise,e.contractor,'yellow'),{maxWidth:300});
-                    marker.valueOf()._icon.style.borderRadius ='2em';
-                    marker.valueOf()._icon.style.boxShadow ='0.5px 0.5px 0.5px 0.5px white';
+
                     ctrErr+=1;
                 }
             });
-            percentage_Err=(ctrErr*100)/parseInt($scope.list[0].done.length);
-            document.querySelector('#countError').innerHTML=ctrErr;
-            document.querySelector('#percentErr').innerHTML=parseInt(percentage_Err)+" %";
 
 
-        })
+
+        }) */
 
     },function(error){
         console.error(error);
