@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpSession;
 import java.util.*;
 
 @RestController
@@ -72,17 +73,49 @@ public class ApiRealisation {
     public List<Map<String,Object>> getReperageAndRealizedError(){
         return realisationRepository.doneWorkError();
     }
+
+    @GetMapping("/groupdate")
+    List<Map<String,Object>> getRealizationGroupByDate(){
+        return realisationRepository.doneWorkRealizedGroupingByDateDefault();
+    }
+    @GetMapping("/errorgroupdate")
+    List<Map<String,Object>> getErrorRealizationGroupByDate(){
+        return realisationRepository.doneWorkErrorGroupingByDateDefault();
+    }
     @GetMapping("/workalls")
     public List<Map<String,List<Map<String,Object>>>> getReperageAndRealizedAlls(){
         List<Map<String,List<Map<String,Object>>>> tabs=new ArrayList<>();
         Map<String,List<Map<String,Object>>> tabUnique=new HashMap<>();
         tabUnique.put("done",realisationRepository.doneWork());
         tabUnique.put("error",realisationRepository.doneWorkError());
+
         tabUnique.put("reperage",reperageRepository.getReperage());
         tabUnique.put("realized",realisationRepository.doneWorkRealized());
         tabUnique.put("realizederrors",realisationRepository.doneWorkRealizedError());
         tabUnique.put("reperagetodo",reperageRepository.getReperageToDo());
+
         tabs.add(tabUnique);
         return tabs;
     }
+
+    @GetMapping("/allgraphics")
+    public List<Map<String,List<Map<String,Object>>>> getReperageAndRealizedGraphics(){
+        List<Map<String,List<Map<String,Object>>>> tabs=new ArrayList<>();
+        Map<String,List<Map<String,Object>>> tabUnique=new HashMap<>();
+        tabUnique.put("realized",realisationRepository.doneWorkRealizedGroupingByDateDefault());
+        tabUnique.put("error",realisationRepository.doneWorkErrorGroupingByDateDefault());
+        tabUnique.put("reperage",reperageRepository.doneWorkToDoGroupingByDateDefault());
+        tabs.add(tabUnique);
+        return tabs;
+    }
+
+    @GetMapping("/failed/{month}")
+    public List<Map<String,Object>> getRealizationWithOutRefByMonth(@PathVariable("month") String month){
+        return  realisationRepository.doneWorkErrorGroupingByDate(month);
+    }
+    @GetMapping("/success/{month}")
+    public List<Map<String,Object>> getRealizationSuccessRefByMonth(@PathVariable("month") String month){
+        return  realisationRepository.doneWorkRealizedGroupingByDate(month);
+    }
+
 }

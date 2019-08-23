@@ -45,6 +45,11 @@ public class HomeController {
         return "pages/contractor_performance";
     }
 
+    @GetMapping("/entreprise")
+    public  String entreprisePerformance(){
+        return "pages/performance_entreprise";
+    }
+
     /*
     @GetMapping("/viewtables")
     public String tablesViews(){

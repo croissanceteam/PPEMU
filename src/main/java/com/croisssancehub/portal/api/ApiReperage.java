@@ -57,6 +57,12 @@ public class ApiReperage {
         return reperageRepository.getReperage();
     }
 
+    @GetMapping("todogroupdate")
+    public List<Map<String,Object>> getReperageGroupByDate(){
+        return reperageRepository.doneWorkToDoGroupingByDateDefault();
+    }
+
+
     @GetMapping("todo")
     public List<Map<String,Object>> getAllToDo(){
         return reperageRepository.getReperageToDo();

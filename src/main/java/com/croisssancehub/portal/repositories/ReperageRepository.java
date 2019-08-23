@@ -27,4 +27,14 @@ public interface ReperageRepository extends JpaRepository<Reperage,Long> {
             " ,rep.town as town ,rep.submission_time as submission_time,rep.pointVente as pointVente,rep.controller_name as controller_name from Reperage rep " +
             "where rep.refClient not in (select r.refClient from Realisation r)")
     List<Map<String,Object>> getReperageToDo();
+
+    @Query("select rep.controller_name as controller, count(rep) as ctr,lot as lot from Reperage rep "+
+            "group by rep.controller_name,rep.lot"+
+            " order by count(rep) desc ")
+    List<Map<String,Object>> doneContractorRef();
+
+    @Query("select count(rep) as ctr,rep.date_export as ExportDate from Reperage rep " +
+            "where rep.refClient not in (select rea.refClient from Realisation rea) and rep.date_export like '%-07-%'" +
+            "group by rep.date_export")
+    List<Map<String,Object>> doneWorkToDoGroupingByDateDefault();
 }
