@@ -13,7 +13,7 @@ app.controller('dashboard',function ($scope,$http) {
         var percentage_Rep=0;
         var percentage_Err=0;
         document.querySelector('#countReperage').innerHTML=$scope.list[0].done.length;
-        console.log('Size :',$scope.list[0].done.length);
+      //  console.log('Size :',$scope.list[0].done.length);
         $scope.list.forEach(function (rep,index) {
 
             rep.done.forEach(function (d,i) {
@@ -40,7 +40,7 @@ app.controller('dashboard',function ($scope,$http) {
                     $scope.errorList.push(e);
                 }
             });
-            console.log("Tab :",$scope.errorList)
+           // console.log("Tab :",$scope.errorList)
 
             percentage_Err=(ctrErr*100)/parseInt($scope.list[0].done.length);
             document.querySelector('#countError').innerHTML=ctrErr;
@@ -52,150 +52,116 @@ app.controller('dashboard',function ($scope,$http) {
         console.error(error);
     })
 
-    $http.get('/api/performance/contractoralls').then(function(data){
-        console.log('Data contractors:',data.data)
-       /* data.data.done.forEach(function(d,i){
-                $scope.dataDone.push(d.contractor);
-            })
-            */
-               /// console.log('Data contractors done:',)
-        $(function () {
-                       $('#dataTablesContractors').DataTable({
-                           data:data.data[0].done,
-                           columns: [
-                               { data: "contractor" },
-                               { "mData":null,
-                                  "bSortable":false,
-                                  "mRender":function(data){
-                                  var blockHTML;
-                                    if(data.ctr<10){
-                                     var blockHTML='<div class="progress progress-xs"><div class="progress-bar progress-bar-danger" style="width: '+data.ctr+'%"></div></div>'
-                                    }else{
-                                    var blockHTML='<div class="progress progress-xs"><div class="progress-bar progress-bar-success" style="width: '+data.ctr+'%"></div></div>'
-                                    }
 
-                                     return blockHTML;
-                                  },
-                                  "sWidth":"20%"
-                                },
-                                { "mData":null,
-                                   "bSortable":false,
-                                   "mRender":function(data){
-                                        var blockHTML;
-                                        if(data.ctr<10){
-                                            var blockHTML='<span class="badge bg-red">'+data.ctr+'</span>'
-                                        }else{
-                                            var blockHTML='<span class="badge bg-green">'+data.ctr+'</span>'
-                                        }
+    $http.get('/api/realized/entreprisesuccessrate').then(function(response){
+            console.log("Data Success :",response.data);
+            $(function () {
+                                                   $('#tableSuccess').DataTable({
+                                                       data:response.data,
+                                                       columns: [
+                                                           { data: "entreprise" },
+                                                          // { data: "sector" },
+                                                            { "mData":null,
+                                                               "bSortable":false,
+                                                               "mRender":function(data){
+                                                                    var blockHTML;
+                                                                    if(data.ctr<1750){
+                                                                        var blockHTML='<span class="badge bg-red">'+data.ctr+'</span>'
+                                                                    }else{
+                                                                        var blockHTML='<span class="badge bg-green">'+data.ctr+'</span>'
+                                                                    }
 
-                                                      return blockHTML;
-                                     }
-                              }
-                           ],
-                           'paging'      : true,
-                           'lengthChange': false,
-                           'searching'   : true,
-                           'ordering'    : false,
-                           'info'        : true,
-                           'autoWidth'   : false,
-                           'loading'     : true
-                       })
-                   })
+                                                                                  return blockHTML;
+                                                                 }
+                                                          },
+                                                          { "mData":null,
+                                                            "bSortable":false,
+                                                            "mRender":function(data){
+                                                                          var blockHTML;
+                                                                          var blockHTML='<span class="badge bg-green">3500</span>'
+                                                                              return blockHTML;
+                                                                     }
+                                                           },
+                                                          { "mData":null,
+                                                            "bSortable":false,
+                                                            "mRender":function(data){
+                                                                    var blockHTML;
+                                                                    if(data.percentage<50){
+                                                                        var blockHTML='<span class="badge bg-red">'+data.percentage+'%</span>'
+                                                                    }else{
+                                                                        var blockHTML='<span class="badge bg-green">'+data.percentage+'%</span>'
+                                                                    }
 
-        $(function () {
-                               $('#dataTablesContractorErrors').DataTable({
-                                   data:data.data[0].error,
-                                   columns: [
-                                       { data: "contractor" },
-                                       { "mData":null,
-                                          "bSortable":false,
-                                          "mRender":function(data){
-                                          var blockHTML;
-                                            if(data.ctr>10){
-                                             var blockHTML='<div class="progress progress-xs"><div class="progress-bar progress-bar-danger" style="width: '+data.ctr+'%"></div></div>'
-                                            }else{
-                                            var blockHTML='<div class="progress progress-xs"><div class="progress-bar progress-bar-success" style="width: '+data.ctr+'%"></div></div>'
-                                            }
-
-                                             return blockHTML;
-                                          },
-                                          "sWidth":"20%"
-                                        },
-                                        { "mData":null,
-                                           "bSortable":false,
-                                           "mRender":function(data){
-                                                var blockHTML;
-                                                if(data.ctr>10){
-                                                    var blockHTML='<span class="badge bg-red">'+data.ctr+'</span>'
-                                                }else{
-                                                    var blockHTML='<span class="badge bg-green">'+data.ctr+'</span>'
-                                                }
-
-                                                              return blockHTML;
-                                             }
-                                      }
-                                   ],
-                                   'paging'      : true,
-                                   'lengthChange': false,
-                                   'searching'   : true,
-                                   'ordering'    : false,
-                                   'info'        : true,
-                                   'autoWidth'   : false,
-                                   'loading'     : true
-                               })
-                           })
-
-          $(function () {
-                                       $('#tableReferencement').DataTable({
-                                           data:data.data[0].ref,
-                                           columns: [
-                                               { data: "controller" },
-                                              // { data: "sector" },
-                                               { "mData":null,
-                                                  "bSortable":false,
-                                                  "mRender":function(data){
-                                                  var blockHTML;
-                                                    if(data.ctr<25){
-                                                     var blockHTML='<div class="progress progress-xs"><div class="progress-bar progress-bar-danger" style="width: '+data.ctr+'%"></div></div>'
-                                                    }else{
-                                                    var blockHTML='<div class="progress progress-xs"><div class="progress-bar progress-bar-success" style="width: '+data.ctr+'%"></div></div>'
-                                                    }
-
-                                                     return blockHTML;
-                                                  },
-                                                  "sWidth":"20%"
-                                                },
-                                                { "mData":null,
-                                                   "bSortable":false,
-                                                   "mRender":function(data){
-                                                        var blockHTML;
-                                                        if(data.ctr<25){
-                                                            var blockHTML='<span class="badge bg-red">'+data.ctr+'</span>'
-                                                        }else{
-                                                            var blockHTML='<span class="badge bg-green">'+data.ctr+'</span>'
-                                                        }
-
-                                                                      return blockHTML;
-                                                     }
-                                              },
-                                              { "mData":null,
-                                                "bSortable":false,
-                                                "mRender":function(data){
-
-                                                         return "Lot"+data.lot;
-                                                   }
-                                               }
-                                           ],
-                                           'paging'      : true,
-                                           'lengthChange': false,
-                                           'searching'   : true,
-                                           'ordering'    : false,
-                                           'info'        : true,
-                                           'autoWidth'   : false,
-                                           'loading'     : true
-                                       })
-                                   })
+                                                                                  return blockHTML;
+                                                               }
+                                                           }
+                                                       ],
+                                                       'paging'      : true,
+                                                       'lengthChange': false,
+                                                       'searching'   : true,
+                                                       'ordering'    : false,
+                                                       'info'        : true,
+                                                       'autoWidth'   : false,
+                                                       'loading'     : true
+                                                   })
+                                               })
     },function(error){
-
+        console.error("Error success rate :",error);
     })
+
+    $http.get('/api/realized/entrepriseserrorrate').then(function(response){
+                console.log("Data Success :",response.data);
+                $(function () {
+                                                       $('#tableError').DataTable({
+                                                           data:response.data,
+                                                           columns: [
+                                                               { data: "entreprise" },
+                                                              // { data: "sector" },
+                                                                { "mData":null,
+                                                                   "bSortable":false,
+                                                                   "mRender":function(data){
+                                                                        var blockHTML;
+                                                                        if(data.ctr>175){
+                                                                            var blockHTML='<span class="badge bg-red">'+data.ctr+'</span>'
+                                                                        }else{
+                                                                            var blockHTML='<span class="badge bg-green">'+data.ctr+'</span>'
+                                                                        }
+
+                                                                                      return blockHTML;
+                                                                     }
+                                                              },
+                                                              { "mData":null,
+                                                                "bSortable":false,
+                                                                "mRender":function(data){
+                                                                              var blockHTML;
+                                                                              var blockHTML='<span class="badge bg-green">3500</span>'
+                                                                                  return blockHTML;
+                                                                         }
+                                                               },
+                                                              { "mData":null,
+                                                                "bSortable":false,
+                                                                "mRender":function(data){
+                                                                        var blockHTML;
+                                                                        if(data.percentage>6){
+                                                                            var blockHTML='<span class="badge bg-red">'+data.percentage+'%</span>'
+                                                                        }else{
+                                                                            var blockHTML='<span class="badge bg-green">'+data.percentage+'%</span>'
+                                                                        }
+
+                                                                                      return blockHTML;
+                                                                   }
+                                                               }
+                                                           ],
+                                                           'paging'      : true,
+                                                           'lengthChange': false,
+                                                           'searching'   : true,
+                                                           'ordering'    : false,
+                                                           'info'        : true,
+                                                           'autoWidth'   : false,
+                                                           'loading'     : true
+                                                       })
+                                                   })
+        },function(error){
+            console.error("Error success rate :",error);
+        })
 })

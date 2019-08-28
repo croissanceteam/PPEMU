@@ -117,5 +117,14 @@ public class ApiRealisation {
     public List<Map<String,Object>> getRealizationSuccessRefByMonth(@PathVariable("month") String month){
         return  realisationRepository.doneWorkRealizedGroupingByDate(month);
     }
+    @GetMapping("/entreprisesuccessrate")
+    public List<Map<String,Object>> getPercentageRealizationByEntreprise(){
+        return realisationRepository.doneWorkRealizedByEntreprise();
+    }
+
+    @GetMapping("/entrepriseserrorrate")
+    public List<Map<String,Object>> getPercentageErrorRealizationByEntreprise(){
+        return realisationRepository.doneWorkErrorRealizedByEntreprise();
+    }
 
 }

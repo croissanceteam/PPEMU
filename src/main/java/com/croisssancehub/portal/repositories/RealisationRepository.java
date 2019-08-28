@@ -78,4 +78,16 @@ public interface RealisationRepository extends JpaRepository<Realisation,Long> {
             " where rea.DateExport like %:month% "+
             "group by rea.DateExport")
     List<Map<String,Object>> doneWorkRealizedGroupingByDate(@Param("month") String month);
+
+    @Query("select count(rea) as ctr,rea.entreprise as entreprise,((count(rea)*100)/3500) as percentage" +
+            " from Realisation rea inner join Reperage rep " +
+            "on rea.refClient=rep.refClient " +
+            "group by rea.entreprise")
+    List<Map<String,Object>> doneWorkRealizedByEntreprise();
+
+
+ @Query("select count(rea) as ctr,rea.entreprise as entreprise,((count(rea)*100)/3500) as percentage from Realisation rea " +
+         "where rea.refClient not in (select rep.refClient from Reperage rep) " +
+         "group by rea.entreprise")
+ List<Map<String,Object>> doneWorkErrorRealizedByEntreprise();
 }

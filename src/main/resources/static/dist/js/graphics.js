@@ -610,6 +610,15 @@ app.controller('dashboard',function ($scope,$http) {
 
             }
         document.querySelector('#select_month').onchange=function(){
-        console.log(document.querySelector('#select_month').value);
+
+        var paramQuery='-'+document.querySelector('#select_month').value+'-';
+        console.log(paramQuery);
+        var linkSuccessMonth='/api/realized/success/'+paramQuery;
+        var linkErrorMonth='/api/realized/failed/'+paramQuery;
+        $http.get(linkSuccessMonth).then(function(success){
+
+            console.log('data :',success.data);
+        },function(error){
+        })
     }
 })

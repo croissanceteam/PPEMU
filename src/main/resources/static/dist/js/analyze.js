@@ -70,7 +70,7 @@ app.controller('dashboard',function ($scope,$http) {
                  geopoint:[-4.965110,22.108700]
              }
     ];
-    $scope. mymap = L.map('mapid').setView([-4.3269, 15.3061], 15);
+    $scope. mymap = L.map('mapid').setView([-5.89624, 22.41659],5);
     /*L.tileLayer('https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png', {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
         subdomains: 'abcd',
@@ -83,15 +83,180 @@ app.controller('dashboard',function ($scope,$http) {
         attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
             '<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
             'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-        id: 'mapbox.streets'
+        id: 'mapbox.light'
     }).addTo($scope. mymap);
     var myIcon = L.divIcon({
       //  className: 'map-icon map-icon-point-of-interest',
         iconSize: [7, 7],
 
     });
-    L.geoJson(shapefile).addTo($scope. mymap);
-    $http.get('/api/realized/workalls').then(function(response){
+    $scope.fillTowns=function(){
+
+    }
+         var info=L.control();
+            info.onAdd = function (map) {
+            	this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
+            	this.update();
+            	return this._div;
+            };
+            info.update = function (props) {
+            	this._div.innerHTML = '<h4>Travaux effectués</h4>' +  (props ?
+            		'<b>' + props.NAME_2 + '</b><br />' + props.density + ' people / mi<sup>2</sup>'
+            		: 'Hover over a state');
+            };
+
+       info.addTo($scope. mymap);
+    function highlightFeature(e) {
+    	var layer = e.target;
+           console.log('Object :',e.target)
+           info.update(layer.feature.properties);
+          // L.tooltip(e.target.feature.properties.NAME_2);
+/*
+               switch(e.target.feature.properties.NAME_2.toLowerCase().trim()){
+                                       case 'kinshasa':
+                                       layer.setStyle({
+                                           		fillOpacity: 1
+                                           	});
+                                     //  return {color:'#2975b8',fillColor:'#2975b8',fillOpacity:0.4,strokeWidth:0.1}
+                                           break;
+                                       case 'haut-lomami':
+                                       layer.setStyle({
+                                           		fillOpacity: 1
+                                           	});
+                                                 // return {color:'#2975b8',fillColor:'#2975b8',fillOpacity:0.4,strokeWidth:0.1}
+                                              break;
+                                        case 'haut-shaba':
+                                        layer.setStyle({
+                                            		fillOpacity: 1
+                                            	});
+                                            //  return {color:'#2975b8',fillColor:'#2975b8',fillOpacity:0.4,strokeWidth:0.1}
+                                             break;
+                                        case 'kolwezi':
+                                        layer.setStyle({
+                                            		fillOpacity: 1
+                                            	});
+                                                 // return {color:'#2975b8',fillColor:'#2975b8',fillOpacity:0.4,strokeWidth:0.1}
+                                               break;
+                                        case 'lualaba':
+                                        layer.setStyle({
+                                            		fillOpacity: 1
+                                            	});
+                                                 // return {color:'#2975b8',fillColor:'#2975b8',fillOpacity:0.4,strokeWidth:0.1}
+                                                break;
+                                        case 'lubumbashi':
+                                        layer.setStyle({
+                                            		fillOpacity: 1
+                                            	});
+                                                 // return {color:'#2975b8',fillColor:'#2975b8',fillOpacity:0.4,strokeWidth:0.1}
+                                                break;
+                                        case 'tanganika':
+                                        layer.setStyle({
+                                            		fillOpacity: 1
+                                            	});
+                                                  //return {color:'#2975b8',fillColor:'#2975b8',fillOpacity:0.4,strokeWidth:0.1}
+                                                break;
+                                        case 'bas-fleuve':
+                                        layer.setStyle({
+                                            		fillOpacity: 1
+                                            	});
+                                                // return {color:'#2975b8',fillColor:'#2975b8',fillOpacity:0.4,strokeWidth:0.1}
+                                              break;
+                                        case 'boma':
+                                        layer.setStyle({
+                                            		fillOpacity: 1
+                                            	});
+                                                  // return {color:'#2975b8',fillColor:'#2975b8',fillOpacity:0.4,strokeWidth:0.1}
+                                               break;
+                                        case 'cataractes':
+                                        layer.setStyle({
+                                            		fillOpacity: 1
+                                            	});
+                                                  // return {color:'#2975b8',fillColor:'#2975b8',fillOpacity:0.4,strokeWidth:0.1}
+                                                break;
+                                         case 'lukaya':
+                                         layer.setStyle({
+                                             		fillOpacity: 1
+                                             	});
+                                                    //return {color:'#2975b8',fillColor:'#2975b8',fillOpacity:0.4,strokeWidth:0.1}
+                                             break;
+                                         case 'Matadi':
+                                                layer.setStyle({
+                                                    		fillOpacity: 1
+                                                    	});
+                                              break;
+
+                                   }
+*/
+
+    	if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
+    		layer.bringToFront();
+    	}
+
+    }
+    function resetHighlight(e) {
+        info.update();
+      //  var geojson=L.geoJson(shapefile);
+    	//geojson.resetStyle(e.target);
+    }
+    function zoomToFeature(e) {
+    	$scope.mymap.fitBounds(e.target.getBounds());
+    }
+    function onEachFeature(feature, layer) {
+    	layer.on({
+    		mouseover: highlightFeature,
+    		mouseout: resetHighlight,
+    		click: zoomToFeature
+    	});
+    }
+
+    L.geoJson(shapefile,{
+            style:function(feature){
+                        switch(feature.properties.NAME_2.toLowerCase().trim()){
+                            case 'kinshasa':
+                            return {color:'#2975b8',fillColor:'#2975b8',fillOpacity:0.4,strokeWidth:0.1}
+                                break;
+                            case 'haut-lomami':
+                                       return {color:'#2975b8',fillColor:'#2975b8',fillOpacity:0.4,strokeWidth:0.1}
+                                   break;
+                             case 'haut-shaba':
+                                   return {color:'#2975b8',fillColor:'#2975b8',fillOpacity:0.4,strokeWidth:0.1}
+                                  break;
+                             case 'kolwezi':
+                                       return {color:'#2975b8',fillColor:'#2975b8',fillOpacity:0.4,strokeWidth:0.1}
+                                    break;
+                             case 'lualaba':
+                                       return {color:'#2975b8',fillColor:'#2975b8',fillOpacity:0.4,strokeWidth:0.1}
+                                     break;
+                             case 'lubumbashi':
+                                       return {color:'#2975b8',fillColor:'#2975b8',fillOpacity:0.4,strokeWidth:0.1}
+                                     break;
+                             case 'tanganika':
+                                       return {color:'#2975b8',fillColor:'#2975b8',fillOpacity:0.4,strokeWidth:0.1}
+                                     break;
+                             case 'bas-fleuve':
+                                      return {color:'#2975b8',fillColor:'#2975b8',fillOpacity:0.4,strokeWidth:0.1}
+                                   break;
+                             case 'boma':
+                                        return {color:'#2975b8',fillColor:'#2975b8',fillOpacity:0.4,strokeWidth:0.1}
+                                    break;
+                             case 'cataractes':
+                                        return {color:'#2975b8',fillColor:'#2975b8',fillOpacity:0.4,strokeWidth:0.1}
+                                     break;
+                              case 'lukaya':
+                                         return {color:'#2975b8',fillColor:'#2975b8',fillOpacity:0.4,strokeWidth:0.1}
+                                  break;
+                              case 'Matadi':
+                                       return {color:'#2975b8',fillColor:'#2975b8',fillOpacity:0.4,strokeWidth:0.1}
+                                   break;
+                            default:
+                                return {color:'silver'}
+                                break;
+                        }
+            },
+            onEachFeature:onEachFeature
+    }).addTo($scope. mymap);
+
+        $http.get('/api/realized/workalls').then(function(response){
         $scope.list=response.data;
 
         var ctrRep=0;

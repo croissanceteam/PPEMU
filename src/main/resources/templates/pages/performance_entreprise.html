@@ -459,91 +459,22 @@
 
             <div class="row" style="padding-left: 1.5em;">
                 <section class="content">
-                    <div class="row">
-                        <div class="col-md-6">
-
-                            <!-- /.box -->
-
-                            <div class="box">
-                                <div class="box-header">
-                                    <h3 class="box-title">Branchements validés par consultant</h3>
-                                </div>
-                                <!-- /.box-header -->
-                                <div class="box-body no-padding">
-                                    <table id="dataTablesContractors" class="table table-bordered table-striped">
-                                        <thead>
-                                        <tr style="font-weight:bold;font-size:16px;">
-                                            <td>Nom du controlleur</td>
-                                            <td>Progression</td>
-                                            <td style="width: 40px">Validation</td>
-                                        </tr>
-                                        </thead>
-                                        <tbody></tbody>
-                                        <tfoot>
-                                        <tr style="font-weight:bold;font-size:16px;">
-                                            <td>Nom du controlleur</td>
-                                            <td>Progression</td>
-                                            <td style="width: 40px">Validation</td>
-                                        </tr>
-                                        </tfoot>
-                                    </table>
-                                </div>
-                                <!-- /.box-body -->
-                            </div>
-                            <!-- /.box -->
-                        </div>
-                        <!-- /.col -->
-                        <div class="col-md-6">
-                            <div class="box">
-                                <div class="box-header">
-                                    <h3 class="box-title">Branchements réalisés sans referencement et validés par consultant</h3>
-                                </div>
-                                <!-- /.box-header -->
-                                <div class="box-body no-padding">
-                                    <table id="dataTablesContractorErrors" class="table table-bordered table-striped">
-                                        <thead>
-                                        <tr style="font-weight:bold;font-size:16px;">
-                                            <td>Nom du controlleur</td>
-                                            <td>Progression</td>
-                                            <td style="width: 40px">Validation</td>
-                                        </tr>
-
-                                        </thead>
-
-                                        <tbody>
-
-                                        </tbody>
-                                        <tfoot>
-                                        <tr style="font-weight:bold;font-size:16px;">
-                                            <td>Nom du controlleur</td>
-                                            <td>Progression</td>
-                                            <td style="width: 40px">Validation</td>
-                                        </tr>
-                                        </tfoot>
-                                    </table>
-                                </div>
-                                <!-- /.box-body -->
-                            </div>
-                        </div>
-                        <!-- /.col -->
-                    </div>
                     <!-- /.row -->
                     <div class="row">
                         <div class="col-xs-12">
                             <div class="box">
                                 <div class="box-header">
-                                    <h3 class="box-title">Données de référencement par controlleur</h3>
+                                    <h1 class="box-title" style="font-weight:lighter;">Réalisations sans référencement par entreprise</h1>
 
-                                    <!-- /.box-header -->
                                     <div class="box-body table-responsive no-padding">
-                                        <table id="tableReferencement" class="table  table table-bordered table-hover">
+                                        <table id="tableError" class="table  table table-bordered table-hover">
                                             <thead>
                                             <tr>
-                                                <th>Nom du controlleur</th>
+                                                <th>Entreprise</th>
                                                 <!--  <th>Secteur</th> -->
-                                                <th>Progression</th>
-                                                <th>Nombre des répérage</th>
-                                                <th>Lot</th>
+                                                <th>Erreur réalisation</th>
+                                                <th>Réalisations attendues</th>
+                                                <th>Pourcentage</th>
 
                                             </tr>
                                             </thead>
@@ -551,11 +482,49 @@
                                             <tfoot>
 
                                             <tr>
-                                                <th>Nom du controlleur</th>
+                                                <th>Entreprise</th>
                                                 <!--   <th>Secteur</th> -->
-                                                <th>Progression</th>
-                                                <th>Nombre des répérage</th>
-                                                <th>Lot</th>
+                                                <th>Erreur réalisation</th>
+                                                <th>Réalisations attendues</th>
+                                                <th>Pourcentage</th>
+
+                                            </tr>
+                                            </tfoot>
+                                        </table>
+                                    </div>
+                                    <!-- /.box-body -->
+                                </div>
+                                <!-- /.box -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="box">
+                                <div class="box-header">
+                                    <h3 class="box-title" style="font-weight:lighter;">Réalisations efféctuées par entreprise</h3>
+
+                                    <div class="box-body table-responsive no-padding">
+                                        <table id="tableSuccess" class="table  table table-bordered table-hover">
+                                            <thead>
+                                            <tr>
+                                                <th>Entreprise</th>
+                                                <!--  <th>Secteur</th> -->
+                                                <th>Réalisations éffectuées</th>
+                                                <th>Réalisations attendues</th>
+                                                <th>Pourcentage</th>
+
+                                            </tr>
+                                            </thead>
+                                            <tbody></tbody>
+                                            <tfoot>
+
+                                            <tr>
+                                                <th>Entreprise</th>
+                                                <!--   <th>Secteur</th> -->
+                                                <th>Réalisations éffectuées</th>
+                                                <th>Réalisations attendues</th>
+                                                <th>Pourcentage</th>
 
                                             </tr>
                                             </tfoot>
