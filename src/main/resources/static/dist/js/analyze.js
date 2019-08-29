@@ -70,7 +70,7 @@ app.controller('dashboard',function ($scope,$http) {
                  geopoint:[-4.965110,22.108700]
              }
     ];
-    $scope. mymap = L.map('mapid').setView([-5.89624, 22.41659],5);
+    $scope. mymap = L.map('mapid').setView([-4.32758, 15.31357],5);
     /*L.tileLayer('https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png', {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
         subdomains: 'abcd',
@@ -106,6 +106,7 @@ app.controller('dashboard',function ($scope,$http) {
             };
 
        info.addTo($scope. mymap);
+       $scope.zoomBase=5;
     function highlightFeature(e) {
     	var layer = e.target;
            console.log('Object :',e.target)
@@ -200,6 +201,9 @@ app.controller('dashboard',function ($scope,$http) {
     }
     function zoomToFeature(e) {
     	$scope.mymap.fitBounds(e.target.getBounds());
+    	$scope.zoomBase+=1;
+        $scope.mymap.setView([e.latlng.lat,e.latlng.lng],$scope.zoomBase)
+    	console.log('Bounds :',e.latlng.lat,e.latlng.lng)
     }
     function onEachFeature(feature, layer) {
     	layer.on({
