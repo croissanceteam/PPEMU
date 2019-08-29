@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="description" content="A front-end template that helps you build fast, modern mobile web apps."/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0"/>
+    <title>500 | MUNA</title>
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes"/>
+    <link rel="icon" sizes="192x192" href="/images/icon.png"/>
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <meta name="apple-mobile-web-app-title" content="/Material Design Lite"/>
+    <link rel="apple-touch-icon-precomposed" href="/images/icon.png"/>
+
+    <!-- Tile icon for Win8 (144x144 + tile color) -->
+    <meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png"/>
+    <meta name="msapplication-TileColor" content="#3372DF"/>
+
+    <link rel="shortcut icon" href="/images/icon.png"/>
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
+        <link rel="stylesheet" href="/css/datatables.css"/>
+
+    <!-- SEO: If your mobile URL is different from the desktop URL, add a canonical link to the desktop page https://developers.google.com/webmasters/smartphone-sites/feature-phones -->
+    <!--
+    <link rel="canonical" href="http://www.example.com/">
+    -->
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
+    <link rel="stylesheet" href="/css/material.cyan-light_blue.min.css"/>
+    <link rel="stylesheet" href="/css/styles.css"/>
+    <link rel="stylesheet" href="/css/datatables.css"/>
+    <link rel="stylesheet" href="/css/getmdl-selec.min.css"/>
+    <link rel="stylesheet" href="/css/polyfill.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+    <style>
+        body {
+          background-color: #2F3242;
+        }
+        svg {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          margin-top: -250px;
+          margin-left: -400px;
+        }
+        .message-box {
+          height: 200px;
+          width: 380px;
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          margin-top: -100px;
+          margin-left: 50px;
+          color: #FFF;
+          font-family: Roboto;
+          font-weight: 300;
+        }
+        .message-box h1 {
+          font-size: 60px;
+          line-height: 46px;
+          margin-bottom: 40px;
+        }
+        .buttons-con .action-link-wrap {
+          margin-top: 40px;
+        }
+        .buttons-con .action-link-wrap a {
+          background: #68c950;
+          padding: 8px 25px;
+          border-radius: 4px;
+          color: #FFF;
+          font-weight: bold;
+          font-size: 14px;
+          transition: all 0.3s linear;
+          cursor: pointer;
+          text-decoration: none;
+          margin-right: 10px
+        }
+        .buttons-con .action-link-wrap a:hover {
+          background: #5A5C6C;
+          color: #fff;
+        }
+        
+        #Polygon-1 , #Polygon-2 , #Polygon-3 , #Polygon-4 , #Polygon-4, #Polygon-5 {
+          animation: float 1s infinite ease-in-out alternate;
+        }
+        #Polygon-2 {
+          animation-delay: .2s; 
+        }
+        #Polygon-3 {
+          animation-delay: .4s; 
+        }
+        #Polygon-4 {
+          animation-delay: .6s; 
+        }
+        #Polygon-5 {
+          animation-delay: .8s; 
+        }
+        
+        @keyframes float {
+          100% {
+            transform: translateY(20px);
+          }
+        }
+        @media (max-width: 450px) {
+          svg {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin-top: -250px;
+            margin-left: -190px;
+          }
+          .message-box {
+            top: 50%;
+            left: 50%;
+            margin-top: -100px;
+            margin-left: -190px;
+            text-align: center;
+          }
+        }
+    
+    /*Vertical Tabs*/
+.mdl-tabs__panel {
+  display: none;
+}
+.vertical-mdl-tabs {
+    margin-top: 30px;
+}
+.vertical-mdl-tabs .mdl-tabs__tab-bar {
+    -webkit-flex-direction: column;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    padding-bottom: 35px;
+    height: inherit;
+    border-bottom: none;
+    border-right: 1px solid rgba(10, 11, 49, 0.20);
+}
+
+.vertical-mdl-tabs .mdl-tabs__tab {
+    width: 100%;
+    height: 35px;
+    line-height: 35px;
+    box-sizing: border-box;
+    letter-spacing: 2px;
+}
+
+.vertical-mdl-tabs .mdl-tabs__tab:hover {
+  background: rgba(158, 158, 158, 0.34);
+  color: black;
+}
+
+.vertical-mdl-tabs.mdl-tabs.is-upgraded a.mdl-tabs__tab.is-active {
+    border-right: 3px solid #00897b;
+}
+.vertical-mdl-tabs.mdl-tabs.is-upgraded .mdl-tabs__tab.is-active:after {
+    content: inherit;
+    height: 0;
+}
+
+.vertical-mdl-tabs.mdl-tabs.is-upgraded .mdl-tabs__panel.is-active, .mdl-tabs__panel {
+    padding: 0 30px;
+}
+
+.vertical-mdl-tabs.mdl-tabs .mdl-tabs__tab {
+    text-align: left;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.mdl-tabs.is-upgraded .mdl-tabs__tab.is-active {
+   color: #00897b;
+}
+th{
+	padding:.5em;
+	text-align:left;
+	padding-left:0;
+}
+   
+    </style>
+  
+    <script type="text/javascript">
+
+     
+    </script>
+  </head>
+  
+<body>
+<svg width="380px" height="500px" viewBox="0 0 837 1045" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+  <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+      <path d="M353,9 L626.664028,170 L626.664028,487 L353,642 L79.3359724,487 L79.3359724,170 L353,9 Z" id="Polygon-1" stroke="#007FB2" stroke-width="6" sketch:type="MSShapeGroup"></path>
+      <path d="M78.5,529 L147,569.186414 L147,648.311216 L78.5,687 L10,648.311216 L10,569.186414 L78.5,529 Z" id="Polygon-2" stroke="#EF4A5B" stroke-width="6" sketch:type="MSShapeGroup"></path>
+      <path d="M773,186 L827,217.538705 L827,279.636651 L773,310 L719,279.636651 L719,217.538705 L773,186 Z" id="Polygon-3" stroke="#795D9C" stroke-width="6" sketch:type="MSShapeGroup"></path>
+      <path d="M639,529 L773,607.846761 L773,763.091627 L639,839 L505,763.091627 L505,607.846761 L639,529 Z" id="Polygon-4" stroke="#F2773F" stroke-width="6" sketch:type="MSShapeGroup"></path>
+      <path d="M281,801 L383,861.025276 L383,979.21169 L281,1037 L179,979.21169 L179,861.025276 L281,801 Z" id="Polygon-5" stroke="#36B455" stroke-width="6" sketch:type="MSShapeGroup"></path>
+  </g>
+</svg>
+<div class="message-box">
+<h1>500</h1>
+<p>Wrong process
+
+  <span></span>
+</p>
+<div class="buttons-con">
+  <div class="action-link-wrap">
+    <a onclick="history.back(-1)" class="link-button link-back-button">Go Back</a>
+    <a href="/" class="link-button">Revenir a la page d'accueil</a>
+  </div>
+</div>
+</div>
+
+ <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script> 
+     <script src="/js/jquery.js"></script> 
+ <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
+
+
+  </body>
+</html>
