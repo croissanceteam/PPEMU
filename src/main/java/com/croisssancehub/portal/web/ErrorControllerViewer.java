@@ -36,7 +36,7 @@ public class ErrorControllerViewer implements ErrorController{
 
     @Override
     public String getErrorPath() {
-        return null;
+        return "/error";
     }
 }
  
