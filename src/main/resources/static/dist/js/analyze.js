@@ -260,7 +260,7 @@ app.controller('dashboard',function ($scope,$http) {
             onEachFeature:onEachFeature
     }).addTo($scope. mymap);
 
-        $http.get('/api/realized/workalls').then(function(response){
+        $http.get('/api/realized/workallsindex').then(function(response){
         $scope.list=response.data;
 
         var ctrRep=0;
@@ -304,6 +304,7 @@ app.controller('dashboard',function ($scope,$http) {
                     percentage_Err=($scope.list[0].realizederrors.length*100)/parseInt($scope.list[0].reperage.length);
                    document.querySelector('#countError').innerHTML=$scope.list[0].realizederrors.length;
                    document.querySelector('#percentErr').innerHTML=Math.round(percentage_Err)+" %";
+        document.querySelector('#cover-spin').style.display="none";
 /*
         $scope.list.forEach(function (rep,index) {
 

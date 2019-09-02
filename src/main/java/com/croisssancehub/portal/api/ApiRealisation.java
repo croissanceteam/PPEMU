@@ -89,6 +89,14 @@ public class ApiRealisation {
         tabUnique.put("done",realisationRepository.doneWork());
         tabUnique.put("error",realisationRepository.doneWorkError());
 
+        tabs.add(tabUnique);
+        return tabs;
+    }
+
+    @GetMapping("/workallsindex")
+    public List<Map<String,List<Map<String,Object>>>> getReperageAndRealizedAllsIndex(){
+        List<Map<String,List<Map<String,Object>>>> tabs=new ArrayList<>();
+        Map<String,List<Map<String,Object>>> tabUnique=new HashMap<>();
         tabUnique.put("reperage",reperageRepository.getReperage());
         tabUnique.put("realized",realisationRepository.doneWorkRealized());
         tabUnique.put("realizederrors",realisationRepository.doneWorkRealizedError());

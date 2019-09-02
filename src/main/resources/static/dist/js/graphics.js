@@ -235,21 +235,10 @@ app.controller('dashboard',function ($scope,$http) {
                 barChartOptions.datasetFill = false
                 barChart.Bar(barChartData, barChartOptions)
             })
-
+                document.querySelector('#cover-spin').style.display="none"
         }
-        document.querySelector('#countReperage').innerHTML=$scope.list[0].reperage.length;
+        document.querySelector('#countReperage').innerHTML=$scope.list[0].done.length;
        // console.log('Size :',$scope.list[0].done);
-       $scope.list[0].reperagetodo.forEach(function(d,i){
-
-       });
-
-       $scope.list[0].realized.forEach(function(d,i){
-
-        });
-
-        $scope.list[0].realizederrors.forEach(function(d,i){
-
-        });
 
 
 
@@ -306,8 +295,8 @@ app.controller('dashboard',function ($scope,$http) {
             console.log('Streets :',streets);
             console.log('Datas Rep :',currentDataSetRef);
             console.log('Datas Rea :',currentDataSetRea);
-            percentage_Rea=(ctrRea*100)/parseInt($scope.list[0].reperage.length);
-            percentage_Rep=(ctrRep*100)/parseInt($scope.list[0].reperage .length);
+            percentage_Rea=(ctrRea*100)/parseInt($scope.list[0].done.length);
+            percentage_Rep=(ctrRep*100)/parseInt($scope.list[0].done.length);
 
 
             document.querySelector('#countRealized').innerHTML=ctrRea;
@@ -354,7 +343,7 @@ app.controller('dashboard',function ($scope,$http) {
 
             percentage_Err=(ctrErr*100)/parseInt($scope.list[0].done.length);
             document.querySelector('#countError').innerHTML=ctrErr;
-            document.querySelector('#percentErr').innerHTML=parseInt(percentage_Err)+" %";
+            document.querySelector('#percentErr').innerHTML=Math.round(percentage_Err)+" %";
             $scope.fillDataSet(streets,currentDataSetRef,currentDataSetRea,currentDataSetErr);
         })
 

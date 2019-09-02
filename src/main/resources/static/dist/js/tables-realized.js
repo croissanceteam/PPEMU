@@ -78,7 +78,7 @@ app.controller('dashboard',function ($scope,$http) {
             percentage_Err=(ctrErr*100)/parseInt($scope.list[0].done.length);
             document.querySelector('#countError').innerHTML=ctrErr;
             document.querySelector('#percentErr').innerHTML=parseInt(percentage_Err)+" %";
-
+            document.querySelector('#cover-spin').style.display="none";
         })
 
     },function(error){
