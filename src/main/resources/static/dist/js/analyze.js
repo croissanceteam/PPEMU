@@ -99,10 +99,12 @@ app.controller('dashboard',function ($scope,$http) {
             	this.update();
             	return this._div;
             };
-            info.update = function (props) {
+            info.update = function (props,ref,rea,error,todo) {
             	this._div.innerHTML = '<h4>Travaux effectués</h4>' +  (props ?
-            		'<b>' + props.NAME_2 + '</b><br />' + props.density + ' people / mi<sup>2</sup>'
-            		: 'Hover over a state');
+            		'<b>' + props.NAME_2 + '</b><br /><br/> <b>Point collectés</b> :' + ref + '<br/><br/>'+
+            		'<b>Branchements</b> : '+rea+'<br/><br/> <b>Erreur Branchement</b> :'+error+
+            		'<br/><br/> <b>Branchement non réalisés</b> :'+todo
+            		: 'Passez le curseur une ville');
             };
 
        info.addTo($scope. mymap);
@@ -110,7 +112,19 @@ app.controller('dashboard',function ($scope,$http) {
     function highlightFeature(e) {
     	var layer = e.target;
            console.log('Object :',e.target)
-           info.update(layer.feature.properties);
+           if(e.target.feature.properties.NAME_2.toLowerCase()=="kinshasa"){
+            info.update
+            (
+            layer.feature.properties,
+            $scope.list[0].reperage.length,
+            $scope.list[0].realized.length,
+            $scope.list[0].realizederrors.length,
+            $scope.list[0].reperagetodo.length
+            );
+           }else{
+            info.update(layer.feature.properties,0,0,0,0);
+           }
+
           // L.tooltip(e.target.feature.properties.NAME_2);
 /*
                switch(e.target.feature.properties.NAME_2.toLowerCase().trim()){

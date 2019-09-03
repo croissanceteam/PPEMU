@@ -45,7 +45,7 @@ app.controller('dashboard',function ($scope,$http) {
                     columns: [
                         { data: "RefClient" },
                         { data: "client" },
-                        { data: "branchement" },
+                        { data: "secteur" },
                         { data: "entreprise" },
                         { data: "contractor" },
                         { data: "street" },

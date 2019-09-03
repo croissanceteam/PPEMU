@@ -47,7 +47,16 @@ app.controller('dashboard',function ($scope,$http) {
                     columns: [
                         { data: "RefClient" },
                         { data: "nameClient" },
-                        { data: "category" },
+                        { "mData":null,
+                                                  "bSortable":false,
+                                                   "mRender":function(data){
+                                                        if(data.secteur!=""){
+                                                                 return data.secteur;
+                                                        }
+                                                        return "NULL"
+
+                                                    }
+                                                },
                         { data: "entreprise" },
                         { data: "contractor" },
                         { "mData":null,

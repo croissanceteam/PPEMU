@@ -11,6 +11,7 @@ app.controller('dashboard',function ($scope,$http) {
         var percentage_Rep=0;
         var percentage_Err=0;
         $scope.tasksList=[];
+
         document.querySelector('#countReperage').innerHTML=$scope.list[0].done.length;
         console.log('Size :',$scope.list[0].done.length);
         $scope.list.forEach(function (rep,index) {
@@ -21,6 +22,8 @@ app.controller('dashboard',function ($scope,$http) {
                 } else{
                     ctrRep+=1;
                     $scope.tasksList.push(d);
+
+
                 }
 
             });
@@ -47,7 +50,6 @@ app.controller('dashboard',function ($scope,$http) {
                     columns: [
                         { data: "ClientRep" },
                         { data: "nameClient" },
-                        { data: "category" },
                         { "mData":null,
                           "bSortable":false,
                            "mRender":function(data){
@@ -93,6 +95,7 @@ app.controller('dashboard',function ($scope,$http) {
             document.querySelector('#percentErr').innerHTML=parseInt(percentage_Err)+" %";
 
         })
+        document.querySelector('#cover-spin').style.display="none";
 
     },function(error){
         console.error(error);

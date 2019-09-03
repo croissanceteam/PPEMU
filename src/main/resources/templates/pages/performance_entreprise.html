@@ -37,8 +37,46 @@
 
     <!-- Google Font -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+    <style>
+
+        #cover-spin {
+    position:fixed;
+    width:100%;
+    left:0;right:0;top:0;bottom:0;
+    background-color:black;
+    opacity:0.7;
+    z-index:9999;
+    display:normal;
+}
+
+@-webkit-keyframes spin {
+	from {-webkit-transform:rotate(0deg);}
+	to {-webkit-transform:rotate(360deg);}
+}
+
+@keyframes spin {
+	from {transform:rotate(0deg);}
+	to {transform:rotate(360deg);}
+}
+
+#cover-spin::after {
+    content:'';
+    display:block;
+    position:absolute;
+    left:50%;top:40%;
+    width:40px;height:40px;
+    border-style:solid;
+    border-color:white;
+    border-top-color:transparent;
+    border-width: 4px;
+    border-radius:50%;
+    -webkit-animation: spin .8s linear infinite;
+    animation: spin .8s linear infinite;
+}
+    </style>
 </head>
 <body class="hold-transition skin-blue sidebar-mini" ng-controller="dashboard">
+<div id="cover-spin"></div>
 <div class="wrapper">
 
     <header class="main-header">
@@ -47,7 +85,7 @@
             <!-- mini logo for sidebar mini 50x50 pixels -->
             <span class="logo-mini"><b>P</b>R</span>
             <!-- logo for regular state and mobile devices -->
-            <span class="logo-lg"><b>Portail REGIDESO</b></span>
+            <span class="logo-lg"><b>CEP-O</b></span>
         </a>
         <!-- Header Navbar: style can be found in header.less -->
         <nav class="navbar navbar-static-top">
@@ -55,6 +93,9 @@
             <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
                 <span class="sr-only">Toggle navigation</span>
             </a>
+            <span style="font-size:1.5em;color:white;font-weight:lighter;position:relative;top:0.4em;left:1em;">
+                <b>Portail branchements sociaux PEMU</b>b>
+             </span>
 
             <div class="navbar-custom-menu">
                 <ul class="nav navbar-nav" style="display: none;">
