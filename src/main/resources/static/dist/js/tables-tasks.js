@@ -1,6 +1,6 @@
 var app=angular.module("app",[]);
 app.controller('dashboard',function ($scope,$http) {
-
+    $scope.URL_DOWNLOAD="http://obspemu.org:9898/storage/liste_referencement.csv";
     $http.get('/api/realized/workalls').then(function(response){
         $scope.list=response.data;
 
@@ -47,6 +47,10 @@ app.controller('dashboard',function ($scope,$http) {
             $(function () {
                 $('#dataTablesErrors').DataTable({
                     data:$scope.tasksList,
+                    dom: 'Bfrtip',
+                            buttons: [
+                                'copy', 'csv', 'excel', 'pdf', 'print'
+                            ],
                     columns: [
                         { data: "ClientRep" },
                         { data: "nameClient" },

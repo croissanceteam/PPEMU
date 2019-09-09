@@ -44,6 +44,10 @@ app.controller('dashboard',function ($scope,$http) {
             $(function () {
                 $('#dataTablesErrors').DataTable({
                     data:$scope.realizedList,
+                    dom: 'Bfrtip',
+                      buttons: [
+                           'copy', 'csv', 'excel', 'pdf', 'print'
+                     ],
                     columns: [
                         { data: "RefClient" },
                         { data: "nameClient" },
