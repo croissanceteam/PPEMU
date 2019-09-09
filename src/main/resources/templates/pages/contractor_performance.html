@@ -375,7 +375,7 @@
                 <li class="header">MENU DE NAVIGATION</li>
                 <li class="active treeview">
                     <a href="#">
-                        <i class="fa fa-dashboard"></i> <span>Visualiser les données</span>
+                        <i class="fa fa-dashboard"></i> <span>Presentation des données</span>
                         <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
@@ -435,6 +435,7 @@
                             <h3 id="countReperage" style="font-weight: lighter">Chargement ..</h3>
 
                             <p>Parcelles référenceés</p>
+                            <br/>
                         </div>
                         <div class="icon">
                             <i class="fa fa-home"></i>
@@ -449,7 +450,9 @@
                         <div class="inner">
                             <h3 id="percentRea" style="font-weight: lighter;">Chargement ..</h3>
 
-                            <p><span id="countRealized" style="font-weight: bold;"></span> Branchements réalisés</p>
+                            <p><span id="countRealized" style="font-weight: bold;"></span> <br/>
+                                Branchements réalisés
+                            </p>
 
                         </div>
                         <div class="icon">
@@ -465,7 +468,9 @@
                         <div class="inner">
                             <h3 id="percentErr" style="font-weight: lighter;">Chargement ..</h3>
 
-                            <p><span id="countError" style="font-weight: bold;"></span> Réalisations sans référencement</p>
+                            <p><span id="countError" style="font-weight: bold;"></span> <br/>
+                                Branchements avec clé érroné
+                            </p>
                         </div>
                         <div class="icon">
                             <i class="fa fa-trash"></i>
@@ -481,7 +486,7 @@
                             <h3 id="percentRep" style="font-weight: lighter;">Chargement ..</h3>
 
                             <p><span id="countRepProgress" style="font-weight: bold;"></span>
-                                Branchements non réalisés
+                                <br/>Branchements non réalisés
                             </p>
                         </div>
                         <div class="icon">
@@ -506,7 +511,7 @@
 
                             <div class="box">
                                 <div class="box-header">
-                                    <h3 class="box-title">Branchements validés par consultant</h3>
+                                    <h3 class="box-title">Synthèse des branchements réalisés et réceptionnés par agent contrôleur</h3>
                                 </div>
                                 <!-- /.box-header -->
                                 <div class="box-body no-padding">
@@ -536,7 +541,7 @@
                         <div class="col-md-6">
                             <div class="box">
                                 <div class="box-header">
-                                    <h3 class="box-title">Branchements réalisés sans referencement et validés par consultant</h3>
+                                    <h3 class="box-title">Synthèse des branchements avec clé érroné par entreprise</h3>
                                 </div>
                                 <!-- /.box-header -->
                                 <div class="box-body no-padding">
@@ -572,7 +577,7 @@
                         <div class="col-xs-12">
                             <div class="box">
                                 <div class="box-header">
-                                    <h3 class="box-title">Données de référencement par controlleur</h3>
+                                    <h3 class="box-title">Synthèse des parcellés référencées par agent contrôleur</h3>
 
                                 <!-- /.box-header -->
                                 <div class="box-body table-responsive no-padding">
@@ -582,7 +587,7 @@
                                                 <th>Nom du controlleur</th>
                                               <!--  <th>Secteur</th> -->
                                                 <th>Progression</th>
-                                                <th>Nombre des répérage</th>
+                                                <th>Réalisé</th>
                                                 <th>Lot</th>
 
                                             </tr>
@@ -594,7 +599,7 @@
                                             <th>Nom du controlleur</th>
                                          <!--   <th>Secteur</th> -->
                                             <th>Progression</th>
-                                            <th>Nombre des répérage</th>
+                                            <th>Réalisé</th>
                                             <th>Lot</th>
 
                                         </tr>
@@ -617,9 +622,9 @@
     <!-- /.content-wrapper -->
     <footer class="main-footer">
         <div class="pull-right hidden-xs">
-            <b>Version</b> 2.4.0
+            <!--<b>Version</b> 2.4.0-->
         </div>
-        <strong>Copyright &copy; 2019 <a href="https://adminlte.io">REGIDESO, RD Congo</a>.</strong> All rights
+        <strong>Copyright &copy; 2019 <a href="http://regideso.cd">REGIDESO, RD Congo</a>.</strong> All rights
         reserved.
     </footer>
 

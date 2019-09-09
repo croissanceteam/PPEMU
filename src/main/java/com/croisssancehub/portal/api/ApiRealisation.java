@@ -113,6 +113,10 @@ public class ApiRealisation {
         tabUnique.put("realized",realisationRepository.doneWorkRealizedGroupingByDateDefault());
         tabUnique.put("error",realisationRepository.doneWorkErrorGroupingByDateDefault());
         tabUnique.put("reperage",reperageRepository.doneWorkToDoGroupingByDateDefault());
+       // tabUnique.put("reperageLot",realisationRepository.doneLotAndTownReperageGroupingDefault());
+        tabUnique.put("realizedLot",realisationRepository.doneLotAndTownRealizationGroupingDefault());
+        tabUnique.put("realizedErrorLot",realisationRepository.doneLotAndTownRealizationErrorGroupingDefault());
+        tabUnique.put("reperagetodoLot",realisationRepository.todoLotAndTownReperageGroupingDefault());
         tabs.add(tabUnique);
         return tabs;
     }
@@ -124,6 +128,21 @@ public class ApiRealisation {
     @GetMapping("/success/{month}")
     public List<Map<String,Object>> getRealizationSuccessRefByMonth(@PathVariable("month") String month){
         return  realisationRepository.doneWorkRealizedGroupingByDate(month);
+    }
+    @GetMapping("/todorep/{month}")
+    public List<Map<String,Object>> getReperageToDoRefByMonth(@PathVariable("month") String month){
+        return  realisationRepository.doneWorkReperageGroupingByDate(month);
+    }
+
+    @GetMapping("/counterwork/{month}")
+    public List<Map<String,List<Map<String,Object>>>> getCounterWorkForGraphics(@PathVariable String month){
+        List<Map<String,List<Map<String,Object>>>> tabs=new ArrayList<>();
+        Map<String,List<Map<String,Object>>> tabUnique=new HashMap<>();
+        tabUnique.put("realized",realisationRepository.doneWorkRealizedGroupingByDate(month));
+        tabUnique.put("error",realisationRepository.doneWorkErrorGroupingByDate(month));
+        tabUnique.put("reperage",realisationRepository.doneWorkReperageGroupingByDate(month));
+        tabs.add(tabUnique);
+        return tabs;
     }
     @GetMapping("/entreprisesuccessrate")
     public List<Map<String,Object>> getPercentageRealizationByEntreprise(){

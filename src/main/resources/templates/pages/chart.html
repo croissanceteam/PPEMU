@@ -377,34 +377,34 @@
                 <li class="header">MENU DE NAVIGATION</li>
                 <li class="active treeview">
                     <a href="#">
-                        <i class="fa fa-dashboard"></i> <span>Graphiques et SIG</span>
+                        <i class="fa fa-dashboard"></i> <span>Presentation des données</span>
                         <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
                     </a>
                     <ul class="treeview-menu">
                         <li ><a href="/"><i class="fa fa-circle-o"></i>Dans une map</a></li>
-                        <li class="active"><a href="i#"><i class="fa fa-circle-o"></i>Dans des graphiques</a></li>
+                        <li class="active"><a href="#"><i class="fa fa-circle-o"></i>Dans des graphiques</a></li>
                     </ul>
                 </li>
                 <li class="treeview">
                     <a href="#">
                         <i class="fa fa-dashboard"></i> <span>Evaluations</span>
                         <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
+                        <i class="fa fa-angle-left pull-right"></i>
             </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li class="active"><a href="/entreprise"><i class="fa fa-circle-o"></i>Des préstataires</a></li>
-                        <li><a href="/contractors"><i class="fa fa-circle-o"></i>Des controlleurs</a></li>
+                        <li class="active"><a href="/entreprise"><i class="fa fa-circle-o"></i>Entreprises</a></li>
+                        <li><a href="/contractors"><i class="fa fa-circle-o"></i>Agents contrôleurs</a></li>
 
                     </ul>
                 </li>
                 <li class="header">LEGENDES</li>
-                <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Non réalisés</span></a></li>
-                <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>Données sans référencement</span></a></li>
-                <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>Total référencement</span></a></li>
-                <li><a href="#"><i class="fa fa-circle-o text-green"></i> <span>Réalisations éffectuées</span></a></li>
+                <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Branchements non réalisés</span></a></li>
+                <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>Branchement avec clés erronée</span></a></li>
+                <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>Parcelles référencées</span></a></li>
+                <li><a href="#"><i class="fa fa-circle-o text-green"></i> <span>Branchements réalisés</span></a></li>
             </ul>
         </section>
         <!-- /.sidebar -->
@@ -434,6 +434,7 @@
                             <h3 id="countReperage" style="font-weight: lighter">Chargement ..</h3>
 
                             <p>Parcelles référencées </p>
+                            <br/>
                         </div>
                         <div class="icon">
                             <i class="fa fa-home"></i>
@@ -448,7 +449,9 @@
                         <div class="inner">
                             <h3 id="percentRea" style="font-weight: lighter;">Chargement .. </h3>
 
-                            <p><span id="countRealized" style="font-weight: bold;"></span> Branchements réalisés</p>
+                            <p><span id="countRealized" style="font-weight: bold;"></span> <br/>
+                                Branchements réalisés
+                            </p>
 
                         </div>
                         <div class="icon">
@@ -464,7 +467,9 @@
                         <div class="inner">
                             <h3 id="percentErr" style="font-weight: lighter;">Chargement ...</h3>
 
-                            <p><span id="countError" style="font-weight: bold;"></span> Réalisations sans référencement</p>
+                            <p><span id="countError" style="font-weight: bold;"></span> <br/>
+                                Branchements avec clé érroné
+                            </p>
                         </div>
                         <div class="icon">
                             <i class="fa fa-trash"></i>
@@ -479,7 +484,9 @@
                         <div class="inner">
                             <h3 id="percentRep" style="font-weight: lighter;">Chargement ..</h3>
 
-                            <p><span id="countRepProgress" style="font-weight: bold;"></span> Branchements non réalisés</p>
+                            <p><span id="countRepProgress" style="font-weight: bold;"></span> <br/>
+                                Branchements non réalisés
+                            </p>
                         </div>
                         <div class="icon">
                             <i class="fa fa-hourglass-half"></i>
@@ -491,31 +498,10 @@
             </div>
             <div class="row">
 
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group" style="padding-left:1em;padding-right:1em;">
-                            <label>Mois</label>
-                            <select class="form-control select2" id="select_month" style="width: 100%;">
-                                <option selected="selected">Tous les mois</option>
-                                <option value="01">Janvier</option>
-                                <option value="02">Févrer</option>
-                                <option value="03">Mars</option>
-                                <option value="04">Avril</option>
-                                <option value="05">Mai</option>
-                                <option value="06">Juin</option>
-                                <option value="07">Juillet</option>
-                                <option value="08">Août</option>
-                                <option value="09">Septembre</option>
-                                <option value="10">Octobre</option>
-                                <option value="11">Novembre</option>
-                                <option value="12">Decembre</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6" style="display:none;">
+
+                <div class="col-md-6" style="display:normal;float:left;">
                     <!-- AREA CHART -->
-                    <div class="box box-primary">
+                    <div class="box box-primary" style="display:none;">
                         <div class="box-header with-border">
                             <h3 class="box-title">Area Chart</h3>
 
@@ -535,9 +521,10 @@
                     <!-- /.box -->
 
                     <!-- DONUT CHART -->
+
                     <div class="box box-danger">
                         <div class="box-header with-border">
-                            <h3 class="box-title">Donut Chart</h3>
+                            <h3 class="box-title">Situation des travaux</h3>
 
                             <div class="box-tools pull-right">
                                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -546,7 +533,42 @@
                             </div>
                         </div>
                         <div class="box-body">
-                            <canvas id="pieChart" style="height:250px"></canvas>
+                            <canvas id="pieChart1" style="height:250px;display:none;"></canvas>
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+                    <div class="row" style="display:none;">
+                        <div class="col-md-6">
+                            <div class="form-group" style="padding-left:1em;padding-right:1em;">
+                                <select class="form-control select2" id="select_tow" style="width: 100%;">
+                                    <option>Katanga</option>
+                                    <option selected>Kinshasa</option>
+                                    <option>Kongo-central</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="box box-danger" style="height:420px;display:none;">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">Situation des travaux par lot</h3>
+
+                            <div class="box-tools pull-right">
+                                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                                </button>
+                                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                            </div>
+                        </div>
+                        <div class="box-body">
+
+                            <canvas id="pieChart2" style="height:250px;display:none;"></canvas>
+                            <ul style="list-style:none; float:right;position:relative;top:-22em;display:none" id="list-filter">
+                                <li ng-repeat="lot in lots" style="cursor:pointer">
+                                    <input type="radio" name="rd"/>
+
+                                    Lot {{lot}}
+                                </li>
+
+                            </ul>
                         </div>
                         <!-- /.box-body -->
                     </div>
@@ -554,9 +576,9 @@
 
                 </div>
                 <!-- /.col (LEFT) -->
-                <div class="col-md-6">
+                <div class="col-md-6" style="display:normal;">
                     <!-- LINE CHART -->
-                    <div class="box box-info">
+                    <div class="box box-info" style="display:none;">
                         <div class="box-header with-border">
                             <h3 class="box-title">Progression des tâches</h3>
 
@@ -588,7 +610,7 @@
                         </div>
                         <div class="box-body">
                             <div class="chart">
-                                <canvas id="barChart" style="height:230px"></canvas>
+                                <canvas id="barChart" style="height:310px;display:none;"></canvas>
                             </div>
                         </div>
                         <!-- /.box-body -->
@@ -599,7 +621,8 @@
 
                 <div class="col-md-6" style="float:right">
                     <!-- LINE CHART -->
-                    <div class="box box-info">
+
+                    <div style="display:none;" class="box box-info">
                         <div class="box-header with-border">
                             <h3 class="box-title">Progression des tâches (Mensuel)</h3>
 
@@ -617,11 +640,32 @@
                         <!-- /.box-body -->
                     </div>
                     <!-- /.box -->
-
+    <br/>
                     <!-- BAR CHART -->
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group" style="padding-left:1em;padding-right:1em;">
+                                <select class="form-control select2" id="select_month" style="width: 100%;">
+
+                                    <option value="01">Janvier</option>
+                                    <option value="02">Févrer</option>
+                                    <option value="03">Mars</option>
+                                    <option value="04">Avril</option>
+                                    <option value="05">Mai</option>
+                                    <option value="06">Juin</option>
+                                    <option value="07" selected>Juillet</option>
+                                    <option value="08">Août</option>
+                                    <option value="09">Septembre</option>
+                                    <option value="10">Octobre</option>
+                                    <option value="11">Novembre</option>
+                                    <option value="12">Decembre</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
                     <div class="box box-success">
                         <div class="box-header with-border">
-                            <h3 class="box-title">Données par LOT(Mensuel)</h3>
+                            <h3 class="box-title">Suvi des travaux journaliers</h3>
 
                             <div class="box-tools pull-right">
                                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -631,7 +675,7 @@
                         </div>
                         <div class="box-body">
                             <div class="chart">
-                                <canvas id="barChartMonth" style="height:230px"></canvas>
+                                <canvas id="barChartMonth" style="height:330px;display:none;"></canvas>
                             </div>
                         </div>
                         <!-- /.box-body -->
@@ -649,12 +693,13 @@
     <!-- /.content-wrapper -->
     <footer class="main-footer">
         <div class="pull-right hidden-xs">
-            <b>Version</b> 2.4.0
+            <!--<b>Version</b> 2.4.0-->
         </div>
-        <strong>Copyright &copy; 2019 <a href="https://adminlte.io">REGIDESO, RD Congo</a>.</strong> All rights
+        <strong>Copyright &copy; 2019 <a href="http://regideso.cd">REGIDESO, RD Congo</a>.</strong> All rights
         reserved.
     </footer>
 
+    <!-- Control Sidebar -->
     <!-- Control Sidebar -->
     <aside class="control-sidebar control-sidebar-dark">
         <!-- Create the tabs -->

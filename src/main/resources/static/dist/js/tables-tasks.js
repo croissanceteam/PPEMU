@@ -31,9 +31,9 @@ app.controller('dashboard',function ($scope,$http) {
             percentage_Rep=(ctrRep*100)/parseInt($scope.list[0].done.length);
 
             document.querySelector('#countRealized').innerHTML=ctrRea;
-            document.querySelector('#percentRea').innerHTML=parseInt(percentage_Rea)+" %";
+            document.querySelector('#percentRea').innerHTML=Math.round(percentage_Rea)+" %";
             document.querySelector('#countRepProgress').innerHTML=ctrRep
-            document.querySelector('#percentRep').innerHTML=parseInt(percentage_Rep)+" %";
+            document.querySelector('#percentRep').innerHTML=Math.round(percentage_Rep)+" %";
 
 
             rep.error.forEach(function(e,i){
@@ -92,7 +92,7 @@ app.controller('dashboard',function ($scope,$http) {
             })
             percentage_Err=(ctrErr*100)/parseInt($scope.list[0].done.length);
             document.querySelector('#countError').innerHTML=ctrErr;
-            document.querySelector('#percentErr').innerHTML=parseInt(percentage_Err)+" %";
+            document.querySelector('#percentErr').innerHTML=Math.round(percentage_Err)+" %";
 
         })
         document.querySelector('#cover-spin').style.display="none";

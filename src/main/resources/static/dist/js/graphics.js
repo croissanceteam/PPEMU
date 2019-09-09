@@ -1,6 +1,23 @@
 var app=angular.module("app",[]);
 app.controller('dashboard',function ($scope,$http) {
+$scope.lots=[
+                        1,
+                        2,
+                        3,
+                        4,
+                        5,
+                        6,
+                        7,
+                        8,
+                        9,
+                        10
+];
+    $scope.lotRange=[
+                {
+                    "country":"kinshasa"
 
+                }
+    ]
     $http.get('/api/realized/workalls').then(function(response){
         $scope.list=response.data;
 
@@ -20,7 +37,7 @@ app.controller('dashboard',function ($scope,$http) {
         var ctrRepGraph=0;
         var ctrReaGraph=0;
         var ctrErrGraph=0;
-        $scope.fillDataSet=function(labelDatas,ref,rea,error){
+        $scope.fillDataSet=function(labelDatas,ref,rea,error,donutRep,donutRea,donutErr){
 
             $(function () {
                 /* ChartJS
@@ -118,53 +135,35 @@ app.controller('dashboard',function ($scope,$http) {
                 //-------------
                 //- LINE CHART -
                 //--------------
-                var lineChartCanvas          = $('#lineChart').get(0).getContext('2d')
-                var lineChart                = new Chart(lineChartCanvas)
-                var lineChartOptions         = areaChartOptions
-                lineChartOptions.datasetFill = false
-                lineChart.Line(areaChartData, lineChartOptions)
+                //var lineChartCanvas          = $('#lineChart').get(0).getContext('2d')
+                //var lineChart                = new Chart(lineChartCanvas)
+                //var lineChartOptions         = areaChartOptions
+                //lineChartOptions.datasetFill = false
+                //lineChart.Line(areaChartData, lineChartOptions)
                 //-------------
                 //- PIE CHART -
                 //-------------
                 // Get context with jQuery - using jQuery's .get() method.
-                var pieChartCanvas = $('#pieChart').get(0).getContext('2d')
+                var pieChartCanvas = $('#pieChart1').get(0).getContext('2d')
                 var pieChart       = new Chart(pieChartCanvas)
                 var PieData        = [
                     {
-                        value    : 700,
+                        value    : donutRep,
                         color    : '#f56954',
                         highlight: '#f56954',
-                        label    : 'Chrome'
+                        label    : 'Reperages non branché'
                     },
                     {
-                        value    : 500,
+                        value    : donutRea,
                         color    : '#00a65a',
                         highlight: '#00a65a',
-                        label    : 'IE'
+                        label    : 'Branchement éffectués'
                     },
                     {
-                        value    : 400,
+                        value    : donutErr,
                         color    : '#f39c12',
                         highlight: '#f39c12',
-                        label    : 'FireFox'
-                    },
-                    {
-                        value    : 600,
-                        color    : '#00c0ef',
-                        highlight: '#00c0ef',
-                        label    : 'Safari'
-                    },
-                    {
-                        value    : 300,
-                        color    : '#3c8dbc',
-                        highlight: '#3c8dbc',
-                        label    : 'Opera'
-                    },
-                    {
-                        value    : 100,
-                        color    : '#d2d6de',
-                        highlight: '#d2d6de',
-                        label    : 'Navigator'
+                        label    : 'Erreur'
                     }
                 ]
                 var pieOptions     = {
@@ -194,6 +193,58 @@ app.controller('dashboard',function ($scope,$http) {
                 //Create pie or douhnut chart
                 // You can switch between pie and douhnut using the method below.
                 pieChart.Doughnut(PieData, pieOptions)
+
+
+
+                  var pieChartCanvas = $('#pieChart2').get(0).getContext('2d')
+                                var pieChart       = new Chart(pieChartCanvas)
+                                var PieData        = [
+                                    {
+                                        value    : donutRep,
+                                        color    : '#f56954',
+                                        highlight: '#f56954',
+                                        label    : 'Reperages non branché'
+                                    },
+                                    {
+                                        value    : donutRea,
+                                        color    : '#00a65a',
+                                        highlight: '#00a65a',
+                                        label    : 'Branchement éffectués'
+                                    },
+                                    {
+                                        value    : donutErr,
+                                        color    : '#f39c12',
+                                        highlight: '#f39c12',
+                                        label    : 'Erreur'
+                                    }
+                                ]
+                                var pieOptions     = {
+                                    //Boolean - Whether we should show a stroke on each segment
+                                    segmentShowStroke    : true,
+                                    //String - The colour of each segment stroke
+                                    segmentStrokeColor   : '#fff',
+                                    //Number - The width of each segment stroke
+                                    segmentStrokeWidth   : 2,
+                                    //Number - The percentage of the chart that we cut out of the middle
+                                    percentageInnerCutout: 50, // This is 0 for Pie charts
+                                    //Number - Amount of animation steps
+                                    animationSteps       : 100,
+                                    //String - Animation easing effect
+                                    animationEasing      : 'easeOutBounce',
+                                    //Boolean - Whether we animate the rotation of the Doughnut
+                                    animateRotate        : true,
+                                    //Boolean - Whether we animate scaling the Doughnut from the centre
+                                    animateScale         : false,
+                                    //Boolean - whether to make the chart responsive to window resizing
+                                    responsive           : true,
+                                    // Boolean - whether to maintain the starting aspect ratio or not when responsive, if set to false, will take up entire container
+                                    maintainAspectRatio  : true,
+                                    //String - A legend template
+                                    legendTemplate       : '<ul class="<%=name.toLowerCase()%>-legend"><% for (var i=0; i<segments.length; i++){%><li><span style="background-color:<%=segments[i].fillColor%>"></span><%if(segments[i].label){%><%=segments[i].label%><%}%></li><%}%></ul>'
+                                }
+                                //Create pie or douhnut chart
+                                // You can switch between pie and douhnut using the method below.
+                                pieChart.Doughnut(PieData, pieOptions)
 
                 //-------------
                 //- BAR CHART -
@@ -235,7 +286,7 @@ app.controller('dashboard',function ($scope,$http) {
                 barChartOptions.datasetFill = false
                 barChart.Bar(barChartData, barChartOptions)
             })
-                document.querySelector('#cover-spin').style.display="none"
+
         }
         document.querySelector('#countReperage').innerHTML=$scope.list[0].done.length;
        // console.log('Size :',$scope.list[0].done);
@@ -344,42 +395,66 @@ app.controller('dashboard',function ($scope,$http) {
             percentage_Err=(ctrErr*100)/parseInt($scope.list[0].done.length);
             document.querySelector('#countError').innerHTML=ctrErr;
             document.querySelector('#percentErr').innerHTML=Math.round(percentage_Err)+" %";
-            $scope.fillDataSet(streets,currentDataSetRef,currentDataSetRea,currentDataSetErr);
+            $http.get('/api/realized/allgraphics').then(function(data){
+                    var tabDates=[];
+                    var tabRep=[];
+                    var tabRea=[];
+                    var tabErr=[];
+                    data.data[0].reperage.forEach(function(d,i){
+                        console.log('Date :',d)
+                        tabDates.push(d.ExportDate)
+                        tabRep.push(d.ctr);
+                        for(var x=0;x<data.data[0].realized.length;x++){
+                            if(data.data[0].realized[x].ExportDate==d.ExportDate)
+                                tabRea.push(data.data[0].realized[x].ctr);
+                               // break;
+                        }
+
+                        for(var x=0;x<data.data[0].error.length;x++){
+                                        if(data.data[0].error[x].ExportDate==d.ExportDate)
+                                            tabErr.push(data.data[0].error[x].ctr);
+                                           // break;
+                        }
+                    })
+                    console.log('Series :',tabDates);
+                    console.log("reperage :",tabRep)
+                    console.log("Realisation :",tabRea)
+                    console.log("Error :",tabErr)
+                    console.log("Data donut rep :",data.data[0].reperagetodoLot[0].ctr);
+                    var totalDonutRep=0;
+                    var totalDonutRea=0;
+                    var totalDonutErr=0;
+                    data.data[0].reperagetodoLot.forEach(function(elt){
+                        totalDonutRep+=elt.ctr;
+                    })
+                    data.data[0].realizedLot.forEach(function(elt){
+                        totalDonutRea+=elt.ctr;
+                    })
+                    data.data[0].realizedErrorLot.forEach(function(elt){
+                        totalDonutErr+=elt.ctr;
+                    })
+                    $scope.fillDataSet(
+                    streets,
+                    currentDataSetRef,
+                    currentDataSetRea,
+                    currentDataSetErr,
+                    totalDonutRep,
+                    totalDonutRea,
+                    totalDonutErr
+                    );
+                    console.log("Select Month:",document.querySelector('#select_month').value);
+                    $scope.filterMonth(tabDates,tabRep,tabRea,tabErr);
+                },function(error){
+
+                });
+
         })
 
     },function(error){
         console.error(error);
     })
 
-    $http.get('/api/realized/allgraphics').then(function(data){
-        var tabDates=[];
-        var tabRep=[];
-        var tabRea=[];
-        var tabErr=[];
-        data.data[0].reperage.forEach(function(d,i){
-            console.log('Date :',d)
-            tabDates.push(d.ExportDate)
-            tabRep.push(d.ctr);
-            for(var x=0;x<data.data[0].realized.length;x++){
-                if(data.data[0].realized[x].ExportDate==d.ExportDate)
-                    tabRea.push(data.data[0].realized[x].ctr);
-                   // break;
-            }
 
-            for(var x=0;x<data.data[0].error.length;x++){
-                            if(data.data[0].error[x].ExportDate==d.ExportDate)
-                                tabErr.push(data.data[0].error[x].ctr);
-                               // break;
-            }
-        })
-        console.log('Series :',tabDates);
-        console.log("reperage :",tabRep)
-        console.log("Realisation :",tabRea)
-        console.log("Error :",tabErr)
-        $scope.filterMonth(tabDates,tabRep,tabRea,tabErr);
-    },function(error){
-
-    });
 
     $scope.filterMonth=function(labelDatas,ref,rea,error){
 
@@ -479,82 +554,16 @@ app.controller('dashboard',function ($scope,$http) {
                     //-------------
                     //- LINE CHART -
                     //--------------
-                    var lineChartCanvas          = $('#lineChartMonth').get(0).getContext('2d')
-                    var lineChart                = new Chart(lineChartCanvas)
-                    var lineChartOptions         = areaChartOptions
-                    lineChartOptions.datasetFill = false
-                    lineChart.Line(areaChartData, lineChartOptions)
+                  //  var lineChartCanvas          = $('#lineChartMonth').get(0).getContext('2d')
+                    //var lineChart                = new Chart(lineChartCanvas)
+                    //var lineChartOptions         = areaChartOptions
+                    //lineChartOptions.datasetFill = false
+                    //lineChart.Line(areaChartData, lineChartOptions)
                     //-------------
                     //- PIE CHART -
                     //-------------
                     // Get context with jQuery - using jQuery's .get() method.
-                    var pieChartCanvas = $('#pieChart').get(0).getContext('2d')
-                    var pieChart       = new Chart(pieChartCanvas)
-                    var PieData        = [
-                        {
-                            value    : 700,
-                            color    : '#f56954',
-                            highlight: '#f56954',
-                            label    : 'Chrome'
-                        },
-                        {
-                            value    : 500,
-                            color    : '#00a65a',
-                            highlight: '#00a65a',
-                            label    : 'IE'
-                        },
-                        {
-                            value    : 400,
-                            color    : '#f39c12',
-                            highlight: '#f39c12',
-                            label    : 'FireFox'
-                        },
-                        {
-                            value    : 600,
-                            color    : '#00c0ef',
-                            highlight: '#00c0ef',
-                            label    : 'Safari'
-                        },
-                        {
-                            value    : 300,
-                            color    : '#3c8dbc',
-                            highlight: '#3c8dbc',
-                            label    : 'Opera'
-                        },
-                        {
-                            value    : 100,
-                            color    : '#d2d6de',
-                            highlight: '#d2d6de',
-                            label    : 'Navigator'
-                        }
-                    ]
-                    var pieOptions     = {
-                        //Boolean - Whether we should show a stroke on each segment
-                        segmentShowStroke    : true,
-                        //String - The colour of each segment stroke
-                        segmentStrokeColor   : '#fff',
-                        //Number - The width of each segment stroke
-                        segmentStrokeWidth   : 2,
-                        //Number - The percentage of the chart that we cut out of the middle
-                        percentageInnerCutout: 50, // This is 0 for Pie charts
-                        //Number - Amount of animation steps
-                        animationSteps       : 100,
-                        //String - Animation easing effect
-                        animationEasing      : 'easeOutBounce',
-                        //Boolean - Whether we animate the rotation of the Doughnut
-                        animateRotate        : true,
-                        //Boolean - Whether we animate scaling the Doughnut from the centre
-                        animateScale         : false,
-                        //Boolean - whether to make the chart responsive to window resizing
-                        responsive           : true,
-                        // Boolean - whether to maintain the starting aspect ratio or not when responsive, if set to false, will take up entire container
-                        maintainAspectRatio  : true,
-                        //String - A legend template
-                        legendTemplate       : '<ul class="<%=name.toLowerCase()%>-legend"><% for (var i=0; i<segments.length; i++){%><li><span style="background-color:<%=segments[i].fillColor%>"></span><%if(segments[i].label){%><%=segments[i].label%><%}%></li><%}%></ul>'
-                    }
-                    //Create pie or douhnut chart
-                    // You can switch between pie and douhnut using the method below.
-                    pieChart.Doughnut(PieData, pieOptions)
+
 
                     //-------------
                     //- BAR CHART -
@@ -596,17 +605,58 @@ app.controller('dashboard',function ($scope,$http) {
                     barChartOptions.datasetFill = false
                     barChart.Bar(barChartData, barChartOptions)
                 })
-
+                document.querySelector('#barChart').style.display="block";
+                document.querySelector('#pieChart1').style.display="block";
+                document.querySelector('#pieChart2').style.display="block";
+                document.querySelector('#barChartMonth').style.display="block";
+                document.querySelector('#list-filter').style.display="block";
+                document.querySelector('#cover-spin').style.display="none";
             }
         document.querySelector('#select_month').onchange=function(){
 
         var paramQuery='-'+document.querySelector('#select_month').value+'-';
         console.log(paramQuery);
-        var linkSuccessMonth='/api/realized/success/'+paramQuery;
-        var linkErrorMonth='/api/realized/failed/'+paramQuery;
+        var linkSuccessMonth='/api/realized/counterwork/'+paramQuery;
         $http.get(linkSuccessMonth).then(function(success){
+            $scope.labelDatasMonth=[];
+            $scope.tabRepMonth=[];
+            $scope.tabReaMonth=[];
+            $scope.tabErrMonth=[];
+            success.data[0].reperage.forEach(function(elt){
+                    $scope.labelDatasMonth.push(elt.ExportDate);
+            });
 
-            console.log('data :',success.data);
+            success.data[0].reperage.forEach(function(elt){
+                if(elt.ctr>0){
+                    $scope.tabRepMonth.push(elt.ctr);
+                }else{
+                    $scope.tabRepMonth.push(0);
+                }
+
+             });
+           success.data[0].realized.forEach(function(elt){
+                  if(elt.ctr>0){
+                         $scope.tabReaMonth.push(elt.ctr);
+                     }else{
+                        $scope.tabReaMonth.push(0);
+                   }
+
+            });
+            success.data[0].error.forEach(function(elt){
+                   if(elt.ctr>0){
+                    $scope.tabErrMonth.push(elt.ctr);
+                   }else{
+                   $scope.tabErrMonth.push(0);
+                   }
+
+             });
+             $scope.filterMonth
+             (
+             $scope.labelDatasMonth,
+             $scope.tabRepMonth,
+             $scope.tabReaMonth,
+             $scope.tabErrMonth
+             );
         },function(error){
         })
     }

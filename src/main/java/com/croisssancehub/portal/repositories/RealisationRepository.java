@@ -73,21 +73,45 @@ public interface RealisationRepository extends JpaRepository<Realisation,Long> {
             " group by rea.DateExport")
     List<Map<String,Object>> doneWorkErrorGroupingByDate(@Param("month") String month);
 
+ @Query("select count(rep) as ctr,rep.date_export as ExportDate from Reperage rep " +
+         "where  rep.date_export like %:month% and rep.refClient not in (select rea.refClient from Realisation rea) " +
+         " group by rep.date_export")
+ List<Map<String,Object>> doneWorkReperageGroupingByDate(@Param("month") String month);
+
     @Query("select count(rea) as ctr,rea.DateExport as ExportDate from Realisation rea inner join Reperage rep " +
             "on rea.refClient=rep.refClient " +
             " where rea.DateExport like %:month% "+
             "group by rea.DateExport")
     List<Map<String,Object>> doneWorkRealizedGroupingByDate(@Param("month") String month);
 
-    @Query("select count(rea) as ctr,rea.entreprise as entreprise,((count(rea)*100)/3500) as percentage" +
+    @Query("select count(rea) as ctr,rea.entreprise as entreprise,((count(rea)*100)/5000) as percentage" +
             " from Realisation rea inner join Reperage rep " +
             "on rea.refClient=rep.refClient " +
             "group by rea.entreprise")
     List<Map<String,Object>> doneWorkRealizedByEntreprise();
 
 
- @Query("select count(rea) as ctr,rea.entreprise as entreprise,((count(rea)*100)/3500) as percentage from Realisation rea " +
+ @Query("select count(rea) as ctr,rea.entreprise as entreprise,((count(rea)*100)/5000) as percentage from Realisation rea " +
          "where rea.refClient not in (select rep.refClient from Reperage rep) " +
          "group by rea.entreprise")
  List<Map<String,Object>> doneWorkErrorRealizedByEntreprise();
+
+ @Query("select count(rep) as ctr,rep.town as town from Reperage rep group by rep.town")
+ List<Map<String,Object>> doneLotAndTownReperageGroupingDefault();
+
+ @Query("select count(rea.refClient) as ctr,rea.town as town,rea.lot as lot from Reperage rep inner join Realisation rea " +
+         "ON rep.refClient=rea.refClient " +
+         "group by rea.town,rea.lot")
+ List<Map<String,Object>> doneLotAndTownRealizationGroupingDefault();
+
+
+ @Query("select count(rea.refClient) as ctr,rea.town as town,rea.lot as lot from Realisation rea " +
+               "where rea.refClient not in (select rep.refClient from Reperage rep) " +
+               "group by rea.town,rea.lot")
+ List<Map<String,Object>> doneLotAndTownRealizationErrorGroupingDefault();
+
+ @Query("select count(rep.refClient) as ctr,rep.town as town,rep.lot as lot from Reperage rep " +
+         "where rep.refClient not in (select rea.refClient from Realisation rea) " +
+         "group by rep.town,rep.lot")
+ List<Map<String,Object>> todoLotAndTownReperageGroupingDefault();
 }

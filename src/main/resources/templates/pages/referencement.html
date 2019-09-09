@@ -83,7 +83,7 @@
 
     <header class="main-header">
         <!-- Logo -->
-        <a href="index2.html" class="logo">
+        <a href="#" class="logo">
             <!-- mini logo for sidebar mini 50x50 pixels -->
             <span class="logo-mini"><b>P</b>R</span>
             <!-- logo for regular state and mobile devices -->
@@ -377,7 +377,7 @@
                 <li class="header">MENU DE NAVIGATION</li>
                 <li class="active treeview">
                     <a href="#">
-                        <i class="fa fa-dashboard"></i> <span>Visualiser les données</span>
+                        <i class="fa fa-dashboard"></i> <span>Presentation des données</span>
                         <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
@@ -396,8 +396,8 @@
             </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="/entreprise"><i class="fa fa-circle-o"></i>Des préstateurs</a></li>
-                        <li><a href="/contractors"><i class="fa fa-circle-o"></i>Des controlleurs</a></li>
+                        <li><a href="/entreprise"><i class="fa fa-circle-o"></i>Entreprises</a></li>
+                        <li><a href="/contractors"><i class="fa fa-circle-o"></i>Agent contrôleur</a></li>
                     </ul>
                 </li>
 
@@ -552,12 +552,12 @@
                         <li><a href="#"><i class="fa fa-circle-o"></i> Level One</a></li>
                     </ul>
                 </li>
-                <li style="display: none;"><a href="https://adminlte.io/docs"><i class="fa fa-book"></i> <span>Documentation</span></a></li>
+                <li style="display: none;"><a href="http://regideso.cd"><i class="fa fa-book"></i> <span>Documentation</span></a></li>
                 <li class="header">LEGENDES</li>
-                <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Non réalisés</span></a></li>
-                <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>Données sans référencement</span></a></li>
-                <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>Total référencement</span></a></li>
-                <li><a href="#"><i class="fa fa-circle-o text-green"></i> <span>Réalisations éffectuées</span></a></li>
+                <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Branchements non réalisés</span></a></li>
+                <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>Branchements avec clé érroné </span></a></li>
+                <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>Parcelles référenceés</span></a></li>
+                <li><a href="#"><i class="fa fa-circle-o text-green"></i> <span>Branchements réalisés</span></a></li>
             </ul>
         </section>
         <!-- /.sidebar -->
@@ -588,6 +588,7 @@
                             <h3 id="countReperage" style="font-weight: lighter">Chargement ..</h3>
 
                             <p>Parcelles référenceés</p>
+                            <br/>
                         </div>
                         <div class="icon">
                             <i class="fa fa-home"></i>
@@ -602,7 +603,9 @@
                         <div class="inner">
                             <h3 id="percentRea" style="font-weight: lighter;">Chargement ..</h3>
 
-                            <p><span id="countRealized" style="font-weight: bold;"></span> Branchements réalisés</p>
+                            <p><span id="countRealized" style="font-weight: bold;"></span><br/>
+                                Branchements réalisés
+                            </p>
 
                         </div>
                         <div class="icon">
@@ -618,7 +621,9 @@
                         <div class="inner">
                             <h3 id="percentErr" style="font-weight: lighter;">Chargement ..</h3>
 
-                            <p><span id="countError" style="font-weight: bold;"></span> Réalisations sans référencement</p>
+                            <p><span id="countError" style="font-weight: bold;"></span> <br/>
+                                Branchements avec clé érroné
+                            </p>
                         </div>
                         <div class="icon">
                             <i class="fa fa-trash"></i>
@@ -634,6 +639,7 @@
                             <h3 id="percentRep" style="font-weight: lighter;">Chargement ..</h3>
 
                             <p><span id="countRepProgress" style="font-weight: bold;"></span>
+                               <br/>
                                 Branchements non réalisés
                             </p>
                         </div>
@@ -664,10 +670,10 @@
                                     <table id="dataTablesErrors" class="table table-bordered table-striped">
                                         <thead>
                                         <tr>
-                                            <th>Numéro Ref. Client</th>
+                                            <th>Numéro de site</th>
                                             <th>Nom du client</th>
                                             <th>Secteur</th>
-                                            <th>Nom controlleur</th>
+                                            <th>Agent contrôleur</th>
                                             <th>Lot</th>
                                             <th>Date de saisie</th>
                                         </tr>
@@ -677,10 +683,10 @@
                                         </tbody>
                                         <tfoot>
                                         <tr>
-                                            <th>Numéro Ref. Client</th>
+                                            <th>Numéro de site</th>
                                             <th>Nom du client</th>
                                             <th>Secteur</th>
-                                            <th>Nom controlleur</th>
+                                            <th>Agent contrôleur</th>
                                             <th>Lot</th>
                                             <th>Date de saisie</th>
                                         </tr>
@@ -704,9 +710,9 @@
     <!-- /.content-wrapper -->
     <footer class="main-footer">
         <div class="pull-right hidden-xs">
-            <b>Version</b> 2.4.0
+          <!--  <b>Version</b> 2.4.0 -->
         </div>
-        <strong>Copyright &copy; 2019 <a href="https://adminlte.io">REGIDESO, RD Congo</a>.</strong> All rights
+        <strong>Copyright &copy; 2019 <a href="http://regideso.cd">REGIDESO, RD Congo</a>.</strong> All rights
         reserved.
     </footer>
 

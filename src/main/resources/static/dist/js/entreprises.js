@@ -80,7 +80,7 @@ app.controller('dashboard',function ($scope,$http) {
                                                                   "bSortable":false,
                                                                   "mRender":function(data){
                                                                                 var blockHTML;
-                                                                                var blockHTML='<span class="badge bg-green">3500</span>'
+                                                                                var blockHTML='<span class="badge bg-green">5000</span>'
                                                                                     return blockHTML;
                                                                            }
                                                                  },
@@ -136,7 +136,7 @@ app.controller('dashboard',function ($scope,$http) {
                                                                       "bSortable":false,
                                                                       "mRender":function(data){
                                                                                     var blockHTML;
-                                                                                    var blockHTML='<span class="badge bg-green">3500</span>'
+                                                                                    var blockHTML='<span class="badge bg-green">5000</span>'
                                                                                         return blockHTML;
                                                                                }
                                                                      },

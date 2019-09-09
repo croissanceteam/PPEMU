@@ -45,10 +45,8 @@ app.controller('dashboard',function ($scope,$http) {
                     columns: [
                         { data: "RefClient" },
                         { data: "client" },
-                        { data: "secteur" },
                         { data: "entreprise" },
                         { data: "contractor" },
-                        { data: "street" },
                         { "mData":null,
                            "bSortable":false,
                            "mRender":function(data){
