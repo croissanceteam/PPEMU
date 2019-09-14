@@ -44,7 +44,9 @@ app.controller('dashboard',function ($scope,$http) {
                     data:$scope.errorList,
                     dom: 'Bfrtip',
                      buttons: [
-                       'copy', 'csv', 'excel', 'pdf', 'print'
+                         { "extend": 'pdf', "text":'<i class="fa fa-file-pdf-o"></i>',"className": 'btn btn-danger' },
+                         { "extend": 'excel', "text":'<i class="fa fa-file-excel-o"></i>',"className": 'btn btn-danger' },
+                         { "extend": 'print', "text":'<i class="fa fa-print"></i>',"className": 'btn btn-danger'}
                      ],
                     columns: [
                         { data: "RefClient" },
