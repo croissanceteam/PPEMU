@@ -1,7 +1,4 @@
 package com.croisssancehub.portal.models;
-
-import jdk.nashorn.internal.ir.annotations.Immutable;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
