@@ -1,6 +1,13 @@
 var app=angular.module("app",[]);
+var URL="http://obspemu.org:9898/mobile/api.php?date=true";
 app.controller('dashboard',function ($scope,$http) {
-
+    $scope.lastupdate;
+    $http.get(URL).then(function(response){
+        $scope.lastupdate=response.data.updated;
+        console.log('Last Updated :',response.data)
+    },function(error){
+        console.error("Date Error :",error)
+    })
     $http.get('/api/realized/workalls').then(function(response){
         $scope.list=response.data;
 

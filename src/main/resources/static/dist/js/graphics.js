@@ -1,5 +1,14 @@
 var app=angular.module("app",[]);
+var URL="http://obspemu.org:9898/mobile/api.php?date=true";
 app.controller('dashboard',function ($scope,$http) {
+    $scope.lastupdate;
+    $http.get(URL).then(function(response){
+        $scope.lastupdate=response.data.updated;
+        console.log('Last Updated :',response.data)
+    },function(error){
+        console.error("Date Error :",error)
+    })
+
 $scope.lots=[
                         1,
                         2,
@@ -416,6 +425,18 @@ $scope.lots=[
                                            // break;
                         }
                     })
+                    if (tabRep.length>0 && tabRea.length==0) {
+                        for (var index = 0; index < tabRep.length; index++) {
+                            tabRea.push(0);
+                            
+                        }
+                    }
+                    if (tabRep.length>0 && tabErr.length==0) {
+                        for (var index = 0; index < tabRep.length; index++) {
+                            tabErr.push(0);
+                            
+                        }
+                    }
                     console.log('Series :',tabDates);
                     console.log("reperage :",tabRep)
                     console.log("Realisation :",tabRea)

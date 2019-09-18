@@ -14,10 +14,12 @@
     <version>1.0</version>
     <packaging>jar</packaging>
     <name>portal</name>
-    <description>Demo project for Spring Boot</description>
+    <description>
+        Portail publique de la REGIDESO
+    </description>
 
     <properties>
-        <java.version>1.8</java.version>
+        <java.version>12</java.version>
     </properties>
 
     <dependencies>
