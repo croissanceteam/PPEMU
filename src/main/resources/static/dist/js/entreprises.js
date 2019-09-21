@@ -1,6 +1,7 @@
 var app=angular.module("app",[]);
 var URL="http://obspemu.org:9898/mobile/api.php?date=true";
 app.controller('dashboard',function ($scope,$http) {
+    document.body.style.zoom = "80%";
     $scope.lastupdate;
     $http.get(URL).then(function(response){
         $scope.lastupdate=response.data.updated;

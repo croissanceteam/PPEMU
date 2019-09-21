@@ -57,31 +57,31 @@ public interface RealisationRepository extends JpaRepository<Realisation,Long> {
             + " order by rea.lot,rep.secteur")
     List<Map<String,Object>> doneWorkRealizedError();
 
-    @Query("select count(rea) as ctr,rea.DateExport as ExportDate from Realisation rea inner join Reperage rep " +
+    @Query("select count(rea) as ctr,substring(rea.DateExport,1,10) as ExportDate from Realisation rea inner join Reperage rep " +
             "on rea.refClient=rep.refClient " +
             " where rea.DateExport like '%-07-%'"+
-            "group by rea.DateExport")
+            "group by substring(rea.DateExport,1,10)")
     List<Map<String,Object>> doneWorkRealizedGroupingByDateDefault();
 
-    @Query("select count(rea) as ctr,rea.DateExport as ExportDate from Realisation rea " +
+    @Query("select count(rea) as ctr,substring(rea.DateExport,1,10) as ExportDate from Realisation rea " +
             "where rea.refClient not in (select rep.refClient from Reperage rep) and rea.DateExport like '%-07-%' " +
-            "group by rea.DateExport")
+            "group by substring(rea.DateExport,1,10)")
     List<Map<String,Object>> doneWorkErrorGroupingByDateDefault();
 
-    @Query("select count(rea) as ctr,rea.DateExport as ExportDate from Realisation rea " +
+    @Query("select count(rea) as ctr,substring(rea.DateExport,1,10) as ExportDate from Realisation rea " +
             "where  rea.DateExport like %:month% and rea.refClient not in (select rep.refClient from Reperage rep) " +
-            " group by rea.DateExport")
+            " group by substring(rea.DateExport,1,10)")
     List<Map<String,Object>> doneWorkErrorGroupingByDate(@Param("month") String month);
 
- @Query("select count(rep) as ctr,rep.date_export as ExportDate from Reperage rep " +
+ @Query("select count(rep) as ctr,substring(rep.date_export,1,10) as ExportDate from Reperage rep " +
          "where  rep.date_export like %:month% and rep.refClient not in (select rea.refClient from Realisation rea) " +
-         " group by rep.date_export")
+         " group by substring(rep.date_export,1,10)")
  List<Map<String,Object>> doneWorkReperageGroupingByDate(@Param("month") String month);
 
-    @Query("select count(rea) as ctr,rea.DateExport as ExportDate from Realisation rea inner join Reperage rep " +
+    @Query("select count(rea) as ctr,substring(rea.DateExport,1,10) as ExportDate from Realisation rea inner join Reperage rep " +
             "on rea.refClient=rep.refClient " +
             " where rea.DateExport like %:month% "+
-            "group by rea.DateExport")
+            "group by substring(rea.DateExport,1,10)")
     List<Map<String,Object>> doneWorkRealizedGroupingByDate(@Param("month") String month);
 
     @Query("select count(rea) as ctr,rea.entreprise as entreprise,((count(rea)*100)/5000) as percentage" +

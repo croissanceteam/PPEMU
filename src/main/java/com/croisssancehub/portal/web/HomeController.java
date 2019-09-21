@@ -50,6 +50,11 @@ public class HomeController {
         return "pages/performance_entreprise";
     }
 
+    @GetMapping("/exports")
+    public  String getExports(){
+        return "pages/exports";
+    }
+
     /*
     @GetMapping("/viewtables")
     public String tablesViews(){

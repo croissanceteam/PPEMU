@@ -1,6 +1,6 @@
 var app=angular.module("app",[]);
 app.controller('dashboard',function ($scope,$http) {
-
+    document.body.style.zoom = "80%";
     $http.get('/api/realized/workalls').then(function(response){
         $scope.list=response.data;
 

@@ -33,8 +33,8 @@ public interface ReperageRepository extends JpaRepository<Reperage,Long> {
             " order by count(rep) desc ")
     List<Map<String,Object>> doneContractorRef();
 
-    @Query("select count(rep) as ctr,rep.date_export as ExportDate from Reperage rep " +
+    @Query("select count(rep) as ctr,substring(rep.date_export,1,10) as ExportDate from Reperage rep " +
             "where rep.refClient not in (select rea.refClient from Realisation rea) and rep.date_export like '%-07-%'" +
-            "group by rep.date_export")
+            "group by substring(rep.date_export,1,10)")
     List<Map<String,Object>> doneWorkToDoGroupingByDateDefault();
 }

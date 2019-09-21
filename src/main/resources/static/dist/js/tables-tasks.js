@@ -1,6 +1,7 @@
 var app=angular.module("app",[]);
 var URL="http://obspemu.org:9898/mobile/api.php?date=true";
 app.controller('dashboard',function ($scope,$http) {
+    document.body.style.zoom = "80%";
     $scope.lastupdate;
     $http.get(URL).then(function(response){
         $scope.lastupdate=response.data.updated;
@@ -54,10 +55,11 @@ app.controller('dashboard',function ($scope,$http) {
             $(function () {
                 $('#dataTablesErrors').DataTable({
                     data:$scope.tasksList,
-                    dom: 'Bfrtip',
+                    dom: 'lBfrtip',
                             buttons: [
                                  { "extend": 'pdf', "text":'<i class="fa fa-file-pdf-o"></i>',"className": 'btn btn-danger' },
-                                 { "extend": 'excel', "text":'<i class="fa fa-file-excel-o"></i>',"className": 'btn btn-danger' },
+                                 { "extend": 'excel', 
+                                 "text":'<i class="fa fa-file-excel-o"></i>',"className": 'btn btn-danger' },
                                  { "extend": 'print', "text":'<i class="fa fa-print"></i>',"className": 'btn btn-danger'}
                             ],
                     columns: [
