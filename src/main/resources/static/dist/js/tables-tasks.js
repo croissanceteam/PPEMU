@@ -1,6 +1,8 @@
 var app=angular.module("app",[]);
 var URL="http://obspemu.org:9898/mobile/api.php?date=true";
 app.controller('dashboard',function ($scope,$http) {
+ 
+    console.log('TASK')
     document.body.style.zoom = "80%";
     $scope.lastupdate;
     $http.get(URL).then(function(response){
@@ -55,13 +57,6 @@ app.controller('dashboard',function ($scope,$http) {
             $(function () {
                 $('#dataTablesErrors').DataTable({
                     data:$scope.tasksList,
-                    dom: 'lBfrtip',
-                            buttons: [
-                                 { "extend": 'pdf', "text":'<i class="fa fa-file-pdf-o"></i>',"className": 'btn btn-danger' },
-                                 { "extend": 'excel', 
-                                 "text":'<i class="fa fa-file-excel-o"></i>',"className": 'btn btn-danger' },
-                                 { "extend": 'print', "text":'<i class="fa fa-print"></i>',"className": 'btn btn-danger'}
-                            ],
                     columns: [
                         { data: "ClientRep" },
                         { data: "nameClient" },
@@ -103,7 +98,51 @@ app.controller('dashboard',function ($scope,$http) {
                     'info'        : true,
                     'autoWidth'   : false,
                     'loading'     : true
-                })
+                });
+                $('#dataTablesErrorsExport').DataTable({
+                    data:$scope.tasksList,
+                    columns: [
+                        { data: "ClientRep" },
+                        { data: "nameClient" },
+                        { "mData":null,
+                          "bSortable":false,
+                           "mRender":function(data){
+                                if(data.secteur!=""){
+                                         return data.secteur;
+                                }
+                                return "NULL"
+
+                            }
+                        },
+                        { data: "controller_name" },
+                        { "mData":null,
+                                                  "bSortable":false,
+                                                  "mRender":function(data){
+                                                            return " Lot"+data.lot;
+                                                  }
+                        },
+                        { "mData":null,
+                           "bSortable":false,
+                           "mRender":function(data){
+                                if(data.submissiontimerep!=null){
+                                var tabData=data.submissiontimerep.toString().split('T')
+                                                                 var tabDate=tabData[0].split('-');
+                                                                 var dateFormat=tabDate[2]+"-"+tabDate[1]+"-"+tabDate[0];
+                                                              return dateFormat;
+                                }
+                                return "-";
+
+                            }
+                         }
+                    ],
+                    'paging'      : false,
+                    'lengthChange': false,
+                    'searching'   : false,
+                    'ordering'    : false,
+                    'info'        : false,
+                    'autoWidth'   : false,
+                    'loading'     : false
+                });
             })
             percentage_Err=(ctrErr*100)/parseInt($scope.list[0].done.length);
             document.querySelector('#countError').innerHTML=ctrErr;

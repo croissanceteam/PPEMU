@@ -52,12 +52,6 @@ app.controller('dashboard',function ($scope,$http) {
             $(function () {
                 $('#dataTablesErrors').DataTable({
                     data:$scope.realizedList,
-                    dom: 'Bfrtip',
-                      buttons: [
-                           { "extend": 'pdf', "text":'<i class="fa fa-file-pdf-o"></i>',"className": 'btn btn-danger' },
-                           { "extend": 'excel', "text":'<i class="fa fa-file-excel-o"></i>',"className": 'btn btn-danger' },
-                           { "extend": 'print', "text":'<i class="fa fa-print"></i>',"className": 'btn btn-danger'}
-                     ],
                     columns: [
                         { data: "RefClient" },
                         { data: "nameClient" },
@@ -96,7 +90,49 @@ app.controller('dashboard',function ($scope,$http) {
                     'info'        : true,
                     'autoWidth'   : false,
                     'loading'     : true
-                })
+                });
+
+                $('#dataTablesErrorsExport').DataTable({
+                    data:$scope.realizedList,
+                    columns: [
+                        { data: "RefClient" },
+                        { data: "nameClient" },
+                        { "mData":null,
+                                                  "bSortable":false,
+                                                   "mRender":function(data){
+                                                        if(data.secteur!=""){
+                                                                 return data.secteur;
+                                                        }
+                                                        return "NULL"
+
+                                                    }
+                                                },
+                        { data: "entreprise" },
+                        { data: "contractor" },
+                        { "mData":null,
+                          "bSortable":false,
+                          "mRender":function(data){
+                                    return " Lot"+data.lot;
+                          }
+                        },
+                        { "mData":null,
+                          "bSortable":false,
+                          "mRender":function(data){
+                                var tabData=data.submissiontime.toString().split('T')
+                                var tabDate=tabData[0].split('-');
+                                var dateFormat=tabDate[2]+"-"+tabDate[1]+"-"+tabDate[0];
+                                return dateFormat;
+                          }
+                        }
+                    ],
+                    'paging'      : false,
+                    'lengthChange': false,
+                    'searching'   : false,
+                    'ordering'    : false,
+                    'info'        : false,
+                    'autoWidth'   : false,
+                    'loading'     : false
+                });
             })
             percentage_Err=(ctrErr*100)/parseInt($scope.list[0].done.length);
             document.querySelector('#countError').innerHTML=ctrErr;
