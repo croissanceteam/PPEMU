@@ -611,7 +611,7 @@ $scope.lots=[
                     var barChartCanvas                   = $('#barChartMonth').get(0).getContext('2d')
                     var barChart                         = new Chart(barChartCanvas)
                     barChart.Bar({
-                        labels  : ['not data'],
+                        labels  : ['Pas des données disponible'],
                         datasets: [
                             {
                                 label               : 'Référencements',
