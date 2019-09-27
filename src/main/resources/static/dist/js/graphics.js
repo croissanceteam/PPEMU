@@ -489,17 +489,18 @@ $scope.lots=[
                     //--------------
                     //- AREA CHART -
                     //--------------
-
-                    // Get context with jQuery - using jQuery's .get() method.
-                    var areaChartCanvas = $('#areaChart').get(0).getContext('2d')
-                    // This will get the first returned node in the jQuery collection.
-                    var areaChart       = new Chart(areaChartCanvas)
-
-                    var areaChartData = {
+                    var barChart;
+                    var barChartData={};
+                    var ChartContent = document.getElementById('contentChart');
+                        ChartContent.innerHTML = '&nbsp;'
+                    $('#contentChart').append('<canvas id="barChartMonth" style="height:330px;"></canvas>');
+                    var barChartCanvas= $('#barChartMonth').get(0).getContext('2d');
+                   if (labelDatas.length>0) {
+                        barChartData = {
                         labels  : labelDatas,
                         datasets: [
                             {
-                                label               : 'Electronics',
+                                label               : 'Référencements',
                                 fillColor           : 'rgba(240, 82, 63, 1)',
                                 strokeColor         : 'rgba(240, 82, 63, 1)',
                                 pointColor          : 'rgba(240, 82, 63, 1)',
@@ -509,7 +510,7 @@ $scope.lots=[
                                 data                : ref
                             },
                             {
-                                label               : 'Référencement réalisé',
+                                label               : 'Branchements réalisés',
                                 fillColor           : 'rgba(29,188,93,0.9)',
                                 strokeColor         : 'rgba(29,188,93,0.8)',
                                 pointColor          : '#3b8bba',
@@ -519,7 +520,7 @@ $scope.lots=[
                                 data                : rea
                             },
                             {
-                                label               : 'Réalisation sans référencement',
+                                label               : 'Branchements sans référencement',
                                 fillColor           : 'rgba(234,169,88,0.9)',
                                 strokeColor         : 'rgba(234,169,88,0.8)',
                                 pointColor          : '#3b8bba',
@@ -530,7 +531,6 @@ $scope.lots=[
                             }
                         ]
                     }
-
                     var areaChartOptions = {
                         //Boolean - If we should show the scale at all
                         showScale               : true,
@@ -569,30 +569,11 @@ $scope.lots=[
                         //Boolean - whether to make the chart responsive to window resizing
                         responsive              : true
                     }
-
-                    //Create the line chart
-                    areaChart.Line(areaChartData, areaChartOptions)
-
-                    //-------------
-                    //- LINE CHART -
-                    //--------------
-                  //  var lineChartCanvas          = $('#lineChartMonth').get(0).getContext('2d')
-                    //var lineChart                = new Chart(lineChartCanvas)
-                    //var lineChartOptions         = areaChartOptions
-                    //lineChartOptions.datasetFill = false
-                    //lineChart.Line(areaChartData, lineChartOptions)
-                    //-------------
-                    //- PIE CHART -
-                    //-------------
-                    // Get context with jQuery - using jQuery's .get() method.
-
-
                     //-------------
                     //- BAR CHART -
                     //-------------
-                    var barChartCanvas                   = $('#barChartMonth').get(0).getContext('2d')
-                    var barChart                         = new Chart(barChartCanvas)
-                    var barChartData                     = areaChartData
+                    
+                    barChart                         = new Chart(barChartCanvas);          
                     barChartData.datasets[1].fillColor   = '#00a65a'
                     barChartData.datasets[1].strokeColor = '#00a65a'
                     barChartData.datasets[1].pointColor  = '#00a65a'
@@ -626,6 +607,48 @@ $scope.lots=[
 
                     barChartOptions.datasetFill = false
                     barChart.Bar(barChartData, barChartOptions)
+                   }else{
+                    var barChartCanvas                   = $('#barChartMonth').get(0).getContext('2d')
+                    var barChart                         = new Chart(barChartCanvas)
+                    barChart.Bar({
+                        labels  : ['not data'],
+                        datasets: [
+                            {
+                                label               : 'Référencements',
+                                fillColor           : 'rgba(240, 82, 63, 1)',
+                                strokeColor         : 'rgba(240, 82, 63, 1)',
+                                pointColor          : 'rgba(240, 82, 63, 1)',
+                                pointStrokeColor    : '#c1c7d1',
+                                pointHighlightFill  : '#fff',
+                                pointHighlightStroke: 'rgba(240, 82, 63,1)',
+                                data                : [0]
+                            },
+                            {
+                                label               : 'Branchements réalisés',
+                                fillColor           : 'rgba(29,188,93,0.9)',
+                                strokeColor         : 'rgba(29,188,93,0.8)',
+                                pointColor          : '#3b8bba',
+                                pointStrokeColor    : 'rgba(29,188,93,1)',
+                                pointHighlightFill  : '#fff',
+                                pointHighlightStroke: 'rgba(29,188,93,1)',
+                                data                : [0]
+                            },
+                            {
+                                label               : 'Branchements sans référencement',
+                                fillColor           : 'rgba(234,169,88,0.9)',
+                                strokeColor         : 'rgba(234,169,88,0.8)',
+                                pointColor          : '#3b8bba',
+                                pointStrokeColor    : 'rgba(234,169,88,1)',
+                                pointHighlightFill  : '#fff',
+                                pointHighlightStroke: 'rgba(234,169,88,1)',
+                                data                : [0]
+                            }
+                        ]
+                    }, barChartOptions).destroy();
+                    
+                   }
+                
+                   
                 })
                 document.querySelector('#barChart').style.display="block";
                 document.querySelector('#pieChart1').style.display="block";
