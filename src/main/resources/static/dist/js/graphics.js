@@ -161,19 +161,19 @@ $scope.lots=[
                         value    : donutRep,
                         color    : '#f56954',
                         highlight: '#f56954',
-                        label    : 'Reperages non branché'
+                        label    : 'Branchements non réalisés'
                     },
                     {
                         value    : donutRea,
                         color    : '#00a65a',
                         highlight: '#00a65a',
-                        label    : 'Branchement éffectués'
+                        label    : 'Branchements réalisés'
                     },
                     {
                         value    : donutErr,
                         color    : '#f39c12',
                         highlight: '#f39c12',
-                        label    : 'Erreur'
+                        label    : 'Branchements avec clé érroné'
                     }
                 ]
                 var pieOptions     = {
@@ -213,19 +213,19 @@ $scope.lots=[
                                         value    : donutRep,
                                         color    : '#f56954',
                                         highlight: '#f56954',
-                                        label    : 'Reperages non branché'
+                                        label    : 'Branchements non réalisés'
                                     },
                                     {
                                         value    : donutRea,
                                         color    : '#00a65a',
                                         highlight: '#00a65a',
-                                        label    : 'Branchement éffectués'
+                                        label    : 'Branchements réalisés'
                                     },
                                     {
                                         value    : donutErr,
                                         color    : '#f39c12',
                                         highlight: '#f39c12',
-                                        label    : 'Erreur'
+                                        label    : 'Branchements avec clé érroné'
                                     }
                                 ]
                                 var pieOptions     = {
@@ -697,7 +697,7 @@ $scope.lots=[
                 if (success.data[0].reperage[i].ExportDate==d) {
                     $scope.tabRepMonth.push(success.data[0].reperage[i].ctr);
                } else {
-                    
+                $scope.tabRepMonth.push(0);
                }
             } catch (err) {
                 $scope.tabRepMonth.push(0);
@@ -705,18 +705,26 @@ $scope.lots=[
             
            })
            $scope.labelDatasMonth.forEach(function(d,i){
-               if (success.data[0].realized[i].ExportDate==d) {
-                    $scope.tabReaMonth.push(success.data[0].realized[i].ctr);
-               } else {
-                    $scope.tabReaMonth.push(0);
-               }
+              try{
+                    if (success.data[0].realized[i].ExportDate==d) {
+                        $scope.tabReaMonth.push(success.data[0].realized[i].ctr);
+                        } else {
+                                $scope.tabReaMonth.push(0);
+                    }
+              }catch(e){
+                $scope.tabReaMonth.push(0);
+              }
         });
             $scope.labelDatasMonth.forEach(function(d,i){
-                if (success.data[0].error[i].ExportDate==d) {
-                    $scope.tabErrMonth.push(success.data[0].error[i].ctr);
-               } else {
+                try {
+                    if (success.data[0].error[i].ExportDate==d) {
+                        $scope.tabErrMonth.push(success.data[0].error[i].ctr);
+                   } else {
+                        $scope.tabErrMonth.push(0);
+                   }   
+                } catch (e) {
                     $scope.tabErrMonth.push(0);
-               }
+                }
             });
             console.log('Labels date :',$scope.labelDatasMonth);
             console.log('Rep date :',$scope.tabRepMonth);
