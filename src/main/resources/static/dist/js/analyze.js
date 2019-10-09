@@ -78,7 +78,7 @@ $scope.lastupdate;
                  geopoint:[-4.965110,22.108700]
              }
     ];
-    $scope. mymap = L.map('mapid').setView([-4.32758, 15.31357],5);
+    $scope. mymap = L.map('mapid').setView([-4.35496, 15.285152],12);
     /*L.tileLayer('https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png', {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
         subdomains: 'abcd',
