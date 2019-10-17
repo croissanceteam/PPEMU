@@ -667,8 +667,8 @@ $scope.lots=[
             $scope.tabRepMonth=[];
             $scope.tabReaMonth=[];
             $scope.tabErrMonth=[];
-            
-            
+            console.log('Data filter :',success.data)
+            console.log("Reperage :",success.data[0].reperage.length)
             if (success.data[0].reperage.length>=success.data[0].realized.length && success.data[0].reperage.length>=success.data[0].error.length) {
                 success.data[0].reperage.forEach(function(elt){
                     $scope.labelDatasMonth.push(elt.ExportDate);
@@ -690,41 +690,48 @@ $scope.lots=[
                     $scope.labelDatasMonth.push(elt.ExportDate);
             });
             }
-            
-
-           $scope.labelDatasMonth.forEach(function(d,i){
-            try {
-                if (success.data[0].reperage[i].ExportDate==d) {
-                    $scope.tabRepMonth.push(success.data[0].reperage[i].ctr);
-               } else {
-                $scope.tabRepMonth.push(0);
-               }
-            } catch (err) {
-                $scope.tabRepMonth.push(0);
+                
+            $scope.addedInArray=false;
+            $scope.labelDatasMonth.forEach(function(d,i){
+            $scope.addedInArray=false;
+              for (elt in success.data[0].reperage) {
+                if (success.data[0].reperage[elt].ExportDate==d) {
+                    $scope.tabRepMonth.push(success.data[0].reperage[elt].ctr);
+                    $scope.addedInArray=true;
+                }
+              }
+            if ($scope.addedInArray!=true) {
+                $scope.tabRepMonth.push(0)
             }
             
-           })
+           });
+           $scope.addedInArray2=false;
            $scope.labelDatasMonth.forEach(function(d,i){
-              try{
-                    if (success.data[0].realized[i].ExportDate==d) {
-                        $scope.tabReaMonth.push(success.data[0].realized[i].ctr);
-                        } else {
-                                $scope.tabReaMonth.push(0);
-                    }
-              }catch(e){
-                $scope.tabReaMonth.push(0);
-              }
+            $scope.addedInArray2=false;
+            for (elt in success.data[0].realized) {
+                if (success.data[0].realized[elt].ExportDate==d) {
+                    $scope.tabReaMonth.push(success.data[0].realized[elt].ctr);
+                    $scope.addedInArray2=true;
+                } 
+            }
+
+            if ($scope.addedInArray2!=true) {
+                $scope.tabReaMonth.push(0)
+            }
         });
+            $scope.addedInArray3=false;
             $scope.labelDatasMonth.forEach(function(d,i){
-                try {
-                    if (success.data[0].error[i].ExportDate==d) {
-                        $scope.tabErrMonth.push(success.data[0].error[i].ctr);
-                   } else {
-                        $scope.tabErrMonth.push(0);
-                   }   
-                } catch (e) {
-                    $scope.tabErrMonth.push(0);
+                $scope.addedInArray3=false;
+                for (elt in success.data[0].error) {
+                    if (success.data[0].error[elt].ExportDate==d) {
+                        $scope.tabErrMonth.push(success.data[0].error[elt].ctr);
+                        $scope.addedInArray3=true;
+                   }
+                    
                 }
+                if ($scope.addedInArray3!=true) {
+                    $scope.tabErrMonth.push(0)
+                } 
             });
             console.log('Labels date :',$scope.labelDatasMonth);
             console.log('Rep date :',$scope.tabRepMonth);
