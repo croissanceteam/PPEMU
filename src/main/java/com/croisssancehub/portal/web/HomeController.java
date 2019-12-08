@@ -11,9 +11,13 @@ public class HomeController {
     @GetMapping("/")
     public String welcome(){
 
-        return "index";
+        return "map-kobotoolbox";
     }
+    @GetMapping("/viewpivots")
+    public String TablePivots(){
 
+        return "pages/pivotTables"; 
+    }
     @GetMapping("/viewcharts")
     public String chartsView(){
 
