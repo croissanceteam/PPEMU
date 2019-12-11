@@ -13,6 +13,13 @@ public class HomeController {
 
         return "map-kobotoolbox";
     }
+
+    @GetMapping("/map")
+    public String secondaryMap(){
+
+        return "index";
+    }
+
     @GetMapping("/viewpivots")
     public String TablePivots(){
 
