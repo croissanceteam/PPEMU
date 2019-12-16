@@ -46,4 +46,14 @@ public class ApiRawData {
     public List<Map<String,Object>> getGrowingPlugs(){
         return realisationImportRepository.getTypePlugs();
     }
+
+    @GetMapping("entreprise")
+    public List<Map<String,Object>> getDoWorkedRealization(){
+        return realisationImportRepository.getWorkByEntreprise();
+    }
+
+    @GetMapping("controller")
+    public List<Map<String,Object>> getDoWorkedController(){
+        return realisationImportRepository.getWorkByController();
+    }
 }

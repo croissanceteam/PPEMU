@@ -98,7 +98,55 @@ app.controller('dashboard',function ($scope,$http) {
           alert("Connexion error")
        }
    })
-   
+  
+   $scope.realizationEntrepriseCallback=function(url,callback){
+
+    $http.get(url).then(function(result) {
+        
+        $(function () {
+            $('#tableEntreprise').DataTable({
+                data:result.data,
+                columns: [
+                   // { data: "sector" },
+                     { "mData":null,
+                        "bSortable":false,
+                        "mRender":function(data){
+                             return (data.entreprise==""?"NoThing":data.entreprise);
+                          }
+                   },
+                   { "mData":null,
+                   "bSortable":false,
+                   "mRender":function(data){
+                        var blockHTML;
+                        if(data.stats<500){
+                            var blockHTML='<span class="badge bg-red">'+data.stats+'</span>'
+                        }else{
+                            var blockHTML='<span class="badge bg-green">'+data.stats+'</span>'
+                        }
+
+                                      return blockHTML;
+                     }
+              }
+               
+                ],
+                'paging'      : true,
+                'lengthChange': false,
+                'searching'   : true,
+                'ordering'    : false,
+                'info'        : true,
+                'autoWidth'   : false,
+                'loading'     : true
+            })
+        })
+        callback({value:result.data,status:true});
+        
+    },function(error){
+
+
+
+    });
+   }
+    $scope.realizationEntrepriseCallback('/api/kobotoolbox/entreprise',function(response){});
     $scope.referenceLotCallback=function(url,callback){
         $http.get(url).then(function(result){
             $(function () {
@@ -143,6 +191,53 @@ app.controller('dashboard',function ($scope,$http) {
            // console.log(error)
         })
     }
+
+    $scope.realizationCtrlCallback=function(url,callback){
+        $http.get(url).then(function(result){
+            $(function () {
+                $('#tableControllers').DataTable({
+                    data:result.data,
+                    columns: [
+                       // { data: "sector" },
+                         { "mData":null,
+                            "bSortable":false,
+                            "mRender":function(data){
+                                 return (data.consultant==""?"Nothings":data.consultant);
+                              }
+                       },
+                       { "mData":null,
+                       "bSortable":false,
+                       "mRender":function(data){
+                            var blockHTML;
+                            if(data.stats<500){
+                                var blockHTML='<span class="badge bg-red">'+data.stats+'</span>'
+                            }else{
+                                var blockHTML='<span class="badge bg-green">'+data.stats+'</span>'
+                            }
+
+                                          return blockHTML;
+                         }
+                  }
+                   
+                    ],
+                    'paging'      : true,
+                    'lengthChange': false,
+                    'searching'   : true,
+                    'ordering'    : false,
+                    'info'        : true,
+                    'autoWidth'   : false,
+                    'loading'     : true
+                })
+            })
+            callback({value:result.data,status:true});
+
+        },function(error){
+            callback({value:error,status:false})
+           // console.log(error)
+        })
+    }
+    $scope.realizationCtrlCallback('/api/kobotoolbox/controller',function(response){});
+
 
     $scope.realizationLotCallback=function(url,callback){
         $http.get(url).then(function(result){

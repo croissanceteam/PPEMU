@@ -21,5 +21,11 @@ public interface RealisationImportRepository extends CrudRepository<RealisationI
 
     @Query("select rea.typeBranche as typeBranche, count(rea) as stats from RealisationImport rea group by rea.typeBranche")
     List<Map<String,Object>> getTypePlugs();
+
+    @Query("select rea.entreprise as entreprise, count(rea) as stats from RealisationImport rea group by rea.entreprise")
+    List<Map<String,Object>> getWorkByEntreprise();
+
+    @Query("select rea.consultant as consultant, count(rea) as stats from RealisationImport rea group by rea.consultant")
+    List<Map<String,Object>> getWorkByController();
     
 }
