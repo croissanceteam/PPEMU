@@ -81,29 +81,18 @@
 
     <header class="main-header">
         <!-- Logo -->
-        <a href="#" class="logo">
-          <!-- mini logo for sidebar mini 50x50 pixels -->
-          <span class="logo-mini"><b>P</b>P</span>
-          <!-- logo for regular state and mobile devices -->
-          <span class="logo-lg"><b>CEP-O</b></span>
-    
+        <a href="index2.html" class="logo">
+            <!-- mini logo for sidebar mini 50x50 pixels -->
+            <span class="logo-mini"><b>P</b>R</span>
+            <!-- logo for regular state and mobile devices -->
+            <span class="logo-lg"><b>CEP-O</b></span>
         </a>
         <!-- Header Navbar: style can be found in header.less -->
         <nav class="navbar navbar-static-top">
-          <!-- Sidebar toggle button-->
-    
-          <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
-            <span class="sr-only">Toggle navigation</span>
-          </a>
-          <span style="font-size:1.5em;color:white;font-weight:lighter;position:relative;top:0.4em;left:1em;">
-            <b>Portail branchements sociaux PEMU</b>
-          </span>
-    
-          <div class="navbar-custom-menu">
-         
-          </div>
+            <!-- Sidebar toggle button-->
+
         </nav>
-      </header>
+    </header>
     <!-- Left side column. contains the logo and sidebar -->
     <aside class="main-sidebar">
         <!-- sidebar: style can be found in sidebar.less -->
@@ -132,8 +121,8 @@
                           </span>
                         </a>
                         <ul class="treeview-menu">
-                          <li class="active"><a href="#"><i class="fa fa-map"></i>Données SIG</a></li>
-                          <li><a href="#"><i class="fa fa-table"></i>Tableau des données</a></li>
+                          <li class="active"><a href="/"><i class="fa fa-map"></i>Données SIG</a></li>
+                          <li><a href="/viewpivots"><i class="fa fa-table"></i>Tableau des données</a></li>
                         </ul>
                       </li>
                 <li class="treeview">
@@ -164,8 +153,6 @@
 
                 <li style="display: none;"><a href="https://adminlte.io/docs"><i class="fa fa-book"></i> <span>Documentation</span></a></li>
                 <li class="header">LEGENDES</li>
-                <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Non réalisés</span></a></li>
-                <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>Données sans référencement</span></a></li>
                 <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>Total référencement</span></a></li>
                 <li><a href="#"><i class="fa fa-circle-o text-green"></i> <span>Réalisations éffectuées</span></a></li>
                 <li class="header">MISE A JOUR</li>
@@ -181,7 +168,7 @@
         <section class="content-header">
             <h1>
                 Tableau de bord
-                <small>Données Synthèses sur les Referencements et Branchements</small>
+                <small>Données des Referencements (KoboToolBox source)</small>
             </h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Accueil</a></li>
@@ -202,7 +189,7 @@
                           <div class="info-box-content">
                             <span class="info-box-text">Parcelles référencées</span>
                             <span class="info-box-number" id="countReperage">Chargement ..</span>
-                            <a style="position:absolute;top:5em;" href="/viewkoboreperage" class="small-box-footer">Voir plus <i class="fa fa-arrow-circle-right"></i></a>
+                            <a style="position:absolute;top:5em;" download="somedata.xls" onclick="return ExcellentExport.excel(this, 'tableRealizationPrint', 'Données des realisations');" href="#" class="small-box-footer">Télécharger <i class="fa fa-download"></i></a>
                           </div>
                           <!-- /.info-box-content -->
                         </div>
@@ -215,7 +202,7 @@
                           <div class="info-box-content">
                             <span class="info-box-text">Branchements réalisés</span>
                             <span class="info-box-number" id="countRealized">Chargement ..</span>
-                            <a style="position:absolute;top:5em;" href="/viewkoborealized" class="small-box-footer">Voir plus <i class="fa fa-arrow-circle-right"></i></a>
+                            <a style="position:absolute;top:5em;" href="/viewkoborealized"  class="small-box-footer">voir plus <i class="fa fa-arrow-circle-right"></i></a>
                           </div>
                           <!-- /.info-box-content -->
                         </div>
@@ -231,32 +218,29 @@
             <div class="row" style="padding-left: 1.5em;">
                 <section class="content">
                     <!-- /.row -->
-                    <div class="row" style="float: left;width:50%;">
+
+                    <div class="row">
+                     
                         <div class="col-xs-12">
                             <div class="box">
+                          
                                 <div class="box-header">
-                                    <h1 class="box-title" style="font-weight:lighter|bold;">Synthèse des référencements</h1>
-
+                                    <h3 class="box-title" style="font-weight:lighter;">Tableau des données</h3>
+                                    
                                     <div class="box-body table-responsive no-padding">
-                                        <table id="tableError" class="table  table table-bordered table-hover">
+                                        <table id="tableRealization" class="table  table table-bordered table-hover">
                                             <thead>
                                             <tr>
-                                                <th>Lot</th>
+                                                <th>N° Site</th>
                                                 <!--  <th>Secteur</th> -->
-                                                <th>Nombres</th>
-
+                                                <th>Nom Client</th>
+                                                <th>Lot</th>
+                                                <th>Contrôleur</th>
+                                                <th>Date sumission</th>
+                                                <th>Secteur</th>
                                             </tr>
                                             </thead>
                                             <tbody></tbody>
-                                            <tfoot>
-
-                                            <tr>
-                                                <th>Lot</th>
-                                                <!--   <th>Secteur</th> -->
-                                                <th>Nombres</th>
-
-                                            </tr>
-                                            </tfoot>
                                         </table>
                                     </div>
                                     <!-- /.box-body -->
@@ -265,136 +249,28 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row" style="float: right;width:50%;">
-                            <div class="col-xs-12">
-                                <div class="box">
-                                    <div class="box-header">
-                                        <h1 class="box-title" style="font-weight:lighter|bold;">Synthèse des branchements</h1>
-    
-                                        <div class="box-body table-responsive no-padding">
-                                            <table id="tableRealiz" class="table  table table-bordered table-hover">
-                                                <thead>
-                                                <tr>
-                                                    <th>Lot</th>
-                                                    <!--  <th>Secteur</th> -->
-                                                    <th>Nombres</th>
-    
-                                                </tr>
-                                                </thead>
-                                                <tbody></tbody>
-                                                <tfoot>
-    
-                                                <tr>
-                                                    <th>Lot</th>
-                                                    <!--   <th>Secteur</th> -->
-                                                    <th>Nombres</th>
-    
-                                                </tr>
-                                                </tfoot>
-                                            </table>
-                                        </div>
-                                        <!-- /.box-body -->
-                                    </div>
-                                    <!-- /.box -->
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row" style="float: left;width:50%;">
-                            <div class="col-xs-12">
-                                <div class="box">
-                                    <div class="box-header">
-                                        <h1 class="box-title" style="font-weight:lighter|bold;">Synthèse des réalisations par entreprises</h1>
-    
-                                        <div class="box-body table-responsive no-padding">
-                                            <table id="tableEntreprise" class="table  table table-bordered table-hover">
-                                                <thead>
-                                                <tr>
-                                                    <th>Entreprises</th>
-                                                    <!--  <th>Secteur</th> -->
-                                                    <th>Realisations</th>
-    
-                                                </tr>
-                                                </thead>
-                                                <tbody></tbody>
-                                                <tfoot>
-    
-                                                <tr>
-                                                    <th>Entreprises</th>
-                                                    <!--   <th>Secteur</th> -->
-                                                    <th>Realisations</th>
-    
-                                                </tr>
-                                                </tfoot>
-                                            </table>
-                                        </div>
-                                        <!-- /.box-body -->
-                                    </div>
-                                    <!-- /.box -->
-                                </div>
-                            </div>
-                        </div>
 
-                        <div class="row" style="float: right;width:50%;">
-                            <div class="col-xs-12">
-                                <div class="box">
-                                    <div class="box-header">
-                                        <h1 class="box-title" style="font-weight:lighter|bold;">Synthèse des réalisations par contrôleurs</h1>
-    
-                                        <div class="box-body table-responsive no-padding">
-                                            <table id="tableControllers" class="table  table table-bordered table-hover">
-                                                <thead>
-                                                <tr>
-                                                    <th>Controleurs</th>
-                                                    <!--  <th>Secteur</th> -->
-                                                    <th>Nombres</th>
-    
-                                                </tr>
-                                                </thead>
-                                                <tbody></tbody>
-                                                <tfoot>
-    
-                                                <tr>
-                                                    <th>Controleurs</th>
-                                                    <!--   <th>Secteur</th> -->
-                                                    <th>Nombres</th>
-    
-                                                </tr>
-                                                </tfoot>
-                                            </table>
-                                        </div>
-                                        <!-- /.box-body -->
-                                    </div>
-                                    <!-- /.box -->
-                                </div>
-                            </div>
-                        </div>
 
-                    <div class="row">
+
+                    <div class="row" style="display: none;">
                         <div class="col-xs-12">
                             <div class="box">
                                 <div class="box-header">
-                                    <h3 class="box-title" style="font-weight:lighter;">Synthèse de type des branchements</h3>
-
+                                    <h3 class="box-title" style="font-weight:lighter;">Tableau des données</h3>
                                     <div class="box-body table-responsive no-padding">
-                                        <table id="tableSuccess" class="table  table table-bordered table-hover">
+                                        <table id="tableRealizationPrint" class="table  table table-bordered table-hover">
                                             <thead>
                                             <tr>
-                                                <th>Type de branchement</th>
+                                                <th>N° Site</th>
                                                 <!--  <th>Secteur</th> -->
-                                                <th>Nombe réalisé</th>
-
+                                                <th>Nom Client</th>
+                                                <th>Lot</th>
+                                                <th>Controlleur</th>
+                                                <th>Date sumission</th>
+                                                <th>Secteur</th>
                                             </tr>
                                             </thead>
                                             <tbody></tbody>
-                                            <tfoot>
-
-                                            <tr>
-                                                    <th>Type de branchement</th>
-                                                    <!--  <th>Secteur</th> -->
-                                                    <th>Nombe réalisé</th>
-
-                                            </tr>
-                                            </tfoot>
                                         </table>
                                     </div>
                                     <!-- /.box-body -->
@@ -453,7 +329,8 @@
 <!-- AdminLTE for demo purposes -->
 <script src="/dist/js/demo.js"></script>
 <script src="/dist/js/angular.min.js"></script>
-<script src="/dist/js/pivotTables.js"></script>
+<script src="/dist/js/pivotTablesRef.js"></script>
+<script src="/dist/js/excellentexport.js"></script>
 <script>
     $(function () {
         $('#example1').DataTable()

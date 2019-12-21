@@ -4,9 +4,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.croisssancehub.portal.models.RealisationImport;
 import com.croisssancehub.portal.models.ReferenceImport;
 import com.croisssancehub.portal.repositories.RealisationImportRepository;
 import com.croisssancehub.portal.repositories.ReferenceImportRepository;
+import com.croisssancehub.portal.services.DataRawServices;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,12 +26,25 @@ public class ApiRawData {
     private ReferenceImportRepository referenceImportRepository;
     @Autowired
     private RealisationImportRepository realisationImportRepository;
+    @Autowired
+    private DataRawServices services;
+
     @GetMapping("refs")
     public Map<String,List<Map<String,Object>>> gets(){
         Map<String,List<Map<String,Object>>>map=new HashMap();
         map.put("reperage", referenceImportRepository.getHomes());
         map.put("realized",realisationImportRepository.getHomeWorkDo());
         return map;
+
+    }
+
+    @GetMapping("ref")
+    public List<ReferenceImport> getstest(){
+        return services.getReferencement();
+    }
+    @GetMapping("rea")
+    public List<RealisationImport> getsRea(){
+        return services.getRealization();
     }
 
     @GetMapping("realizedlot")

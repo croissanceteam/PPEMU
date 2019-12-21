@@ -25,6 +25,19 @@ public class HomeController {
 
         return "pages/pivotTables"; 
     }
+    @GetMapping("/viewkoborealized")
+    public String TablePivotsRealization(){
+
+        return "pages/pivotTables-realization"; 
+    }
+
+
+    @GetMapping("/viewkoboreperage")
+    public String TablePivotsReperage(){
+
+        return "pages/pivotTables-reperage"; 
+    }
+
     @GetMapping("/viewcharts")
     public String chartsView(){
 

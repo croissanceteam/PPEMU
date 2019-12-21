@@ -77,12 +77,13 @@ app.controller('dashboard',function ($scope,$http) {
    $scope.synthesisData=function(URL,callback){
      $http.get(URL).then(function(result){
          $scope.list=result.data;
-        console.log('Count Rep :',$scope.list.reperage.length)
-        console.log('Count Rea :',$scope.list.realized.length)
+        console.log('Count RepBASE :',$scope.list.reperage.length)
+        console.log('Count ReaBASE :',$scope.list.realized.length)
         callback({
             status:true,
             ref:$scope.list.reperage.length,
-            rea:$scope.list.realized.length
+            rea:$scope.list.realized.length,
+            data:$scope.list.reperage
         });
      },function(error){
         callback({status:false});
@@ -92,7 +93,125 @@ app.controller('dashboard',function ($scope,$http) {
        if (response.status==true) {
             document.querySelector('#countReperage').innerHTML=response.ref;
             document.querySelector('#countRealized').innerHTML=response.rea;
+            console.log("Data Printable :",response.data)
             document.querySelector('#cover-spin').style="display:none;";
+            $(function () {
+                $('#tableRealization').DataTable({
+                    data:response.data,
+                    columns: [
+                       // { data: "sector" },
+                         { "mData":null,
+                            "bSortable":false,
+                            "mRender":function(data){
+                                
+                                 return data.refClient;
+                              }
+                       },
+                       { "mData":null,
+                       "bSortable":false,
+                       "mRender":function(data){
+                            return (data.nameClient==null?"NoData":data.nameClient.toString().toUpperCase())
+                         }
+                  },
+                  { "mData":null,
+                  "bSortable":false,
+                  "mRender":function(data){
+                       return "Lot "+data.lot;
+                    }
+             },
+             { "mData":null,
+             "bSortable":false,
+             "mRender":function(data){
+                  return (data.controlleur==null?"NoData":data.controlleur.toString().toUpperCase())
+               }
+        },
+        { "mData":null,
+        "bSortable":false,
+        "mRender":function(data){
+            var date_format=data.submission_time.toString().split('T')[0];
+                date_format=date_format.split('-')[2]+"-"+date_format.split('-')[1]+"-"+date_format.split('-')[0];
+             return date_format;
+          }
+   },
+        { "mData":null,
+        "bSortable":false,
+        "mRender":function(data){
+             return data.secteur;
+          }
+   }
+    
+         
+              
+                   
+                    ],
+                    'paging'      : true,
+                    'lengthChange': false,
+                    'searching'   : true,
+                    'ordering'    : false,
+                    'info'        : true,
+                    'autoWidth'   : false,
+                    'loading'     : true
+                })
+            })
+
+            $(function () {
+                $('#tableRealizationPrint').DataTable({
+                    data:response.data,
+                    columns: [
+                       // { data: "sector" },
+                         { "mData":null,
+                            "bSortable":false,
+                            "mRender":function(data){
+                                
+                                 return data.refClient;
+                              }
+                       },
+                       { "mData":null,
+                       "bSortable":false,
+                       "mRender":function(data){
+                            return (data.nameClient==null?"NoData":data.nameClient.toString().toUpperCase())
+                         }
+                  },
+                  { "mData":null,
+                  "bSortable":false,
+                  "mRender":function(data){
+                       return "Lot "+data.lot;
+                    }
+             },
+             { "mData":null,
+             "bSortable":false,
+             "mRender":function(data){
+                return (data.controlleur==null?"NoData":data.controlleur.toString().toUpperCase())
+               }
+        },
+        { "mData":null,
+        "bSortable":false,
+        "mRender":function(data){
+            var date_format=data.submission_time.toString().split('T')[0];
+                date_format=date_format.split('-')[2]+"-"+date_format.split('-')[1]+"-"+date_format.split('-')[0];
+             return date_format;
+          }
+   },
+   { "mData":null,
+        "bSortable":false,
+        "mRender":function(data){
+             return data.secteur;
+          }
+   }
+    
+         
+              
+                   
+                    ],
+                    'paging'      : false,
+                    'lengthChange': false,
+                    'searching'   : true,
+                    'ordering'    : false,
+                    'info'        : true,
+                    'autoWidth'   : false,
+                    'loading'     : true
+                })
+            })
        } else {
           document.querySelector('#cover-spin').style="display:none;";
           alert("Connexion error")
@@ -209,7 +328,7 @@ app.controller('dashboard',function ($scope,$http) {
                        "bSortable":false,
                        "mRender":function(data){
                             var blockHTML;
-                            if(data.stats<100){
+                            if(data.stats<500){
                                 var blockHTML='<span class="badge bg-red">'+data.stats+'</span>'
                             }else{
                                 var blockHTML='<span class="badge bg-green">'+data.stats+'</span>'
