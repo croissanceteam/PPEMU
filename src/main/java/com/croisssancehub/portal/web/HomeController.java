@@ -8,12 +8,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class HomeController {
 
+    /*
     @GetMapping("/")
     public String welcome(){
 
         return "map-kobotoolbox";
     }
-
+*/
+    @GetMapping("/")
+    public String welcome(){
+        return "pages/pivotTables";
+    }
+    
     @GetMapping("/map")
     public String secondaryMap(){
 
