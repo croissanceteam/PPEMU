@@ -78,7 +78,6 @@
 <body class="hold-transition skin-blue sidebar-mini" ng-controller="dashboard">
 <div id="cover-spin"></div>
 <div class="wrapper">
-
     <header class="main-header">
         <!-- Logo -->
         <a href="/" class="logo">
@@ -95,15 +94,17 @@
             </a>
             <span style="font-size:1.5em;color:white;font-weight:lighter;position:relative;top:0.4em;left:1em;">
                 <b>Portail branchements sociaux PEMU</b>
-      </span>
-      
+        </span>
+
+    
         </nav>
     </header>
     <!-- Left side column. contains the logo and sidebar -->
     <aside class="main-sidebar">
         <!-- sidebar: style can be found in sidebar.less -->
         <section class="sidebar">
-
+            <!-- Sidebar user panel -->
+        
             <!-- search form -->
             <form action="#" method="get" class="sidebar-form">
                 <div class="input-group">
@@ -126,11 +127,11 @@
                           </span>
                         </a>
                         <ul class="treeview-menu">
-                          <li class="active"><a href="#"><i class="fa fa-map"></i>Données SIG</a></li>
+                          <li style="display: none;" class="active"><a href="/"><i class="fa fa-map"></i>Données SIG</a></li>
                           <li><a href="/viewpivots"><i class="fa fa-table"></i>Tableau des données</a></li>
                         </ul>
                       </li>
-                <li class="treeview">
+                <li class="treeview" style="display: none;">
                     <a href="#">
                         <i class="fa fa-dashboard"></i> <span>Presentation des données</span>
                         <span class="pull-right-container">
@@ -143,7 +144,7 @@
                     </ul>
                 </li>
 
-                <li class="treeview">
+                <li class="treeview" style="display: none;">
                     <a href="#">
                         <i class="fa fa-bar-chart"></i> <span>Evaluations</span>
                         <span class="pull-right-container">
@@ -151,19 +152,19 @@
             </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="/entreprise"><i class="fa fa-circle-o"></i>Des entreprises</a></li>
-                        <li><a href="/contractors"><i class="fa fa-circle-o"></i>Des controlleurs</a></li>
+                        <li><a href="/entreprise"><i class="fa fa-circle-o"></i>Entreprises</a></li>
+                        <li><a href="/contractors"><i class="fa fa-circle-o"></i>Agents contrôleurs</a></li>
                     </ul>
                 </li>
 
                 <li style="display: none;"><a href="https://adminlte.io/docs"><i class="fa fa-book"></i> <span>Documentation</span></a></li>
                 <li class="header">LEGENDES</li>
-                <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Non réalisés</span></a></li>
-                <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>Données sans référencement</span></a></li>
-                <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>Total référencement</span></a></li>
-                <li><a href="#"><i class="fa fa-circle-o text-green"></i> <span>Réalisations éffectuées</span></a></li>
+                <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>Appropriations</span></a></li>
+                <li><a href="#"><i class="fa fa-circle-o text-green"></i> <span>Branchements sociaux</span></a></li>
+                <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>Pose compteur</span></a></li>
+                <li><a href="#"><i class="fa fa-circle-o text-purple"></i> <span>Total général</span></a></li>
                 <li class="header">MISE A JOUR</li>
-                    <li><a href="#"><i class="fa fa-calendar text-blue"></i> <span>{{lastupdate}}</span></a></li>
+                <li><a href="#"><i class="fa fa-calendar text-blue"></i> <span>{{lastupdate}}</span></a></li>
             </ul>
         </section>
         <!-- /.sidebar -->
@@ -175,7 +176,7 @@
         <section class="content-header">
             <h1>
                 Tableau de bord
-                <small>Données des performances du contractant</small>
+                <small>Données Synthèses sur les Referencements et Branchements</small>
             </h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Accueil</a></li>
@@ -185,191 +186,129 @@
 
         <!-- Main content -->
         <section class="content">
-            <!-- Small boxes (Stat box) -->
             <div class="row">
-                <div class="col-lg-3 col-xs-6">
-                    <!-- small box -->
-                    <div class="small-box bg-aqua">
-                        <div class="inner">
-                            <h3 id="countReperage" style="font-weight: lighter">Chargement ..</h3>
-
-                            <p>Parcelles référenceés</p>
-                            <br/>
+            
+           
+                <div class="col-md-3 col-sm-6 col-xs-12" style="float: left;position:relative;left:1%">
+                        <div class="info-box">
+                          <span class="info-box-icon bg-aqua"><i class="fa fa-clipboard"></i></span>
+                          <div class="info-box-content">
+                            <span class="info-box-text">Appropriation</span>
+                            <span class="info-box-number" id="countAppro">Chargement ..</span>
+                            <a id="lnk_appro_download" style="position:absolute;top:5em;display:none;" href="#" download="somedata.xls" onclick="return ExcellentExport.excel(this, 'tableRealizationPrint', 'Données des realisations');" class="small-box-footer">Télécharger <i class="fa fa-download"></i></a>
+                            <a id="lnk_appro" style="position:absolute;top:5em;display:none;" href="/plugs/appropriation" class="small-box-footer">Voir plus <i class="fa fa-arrow-circle-right"></i></a>
+                          </div>
+                          <!-- /.info-box-content -->
                         </div>
-                        <div class="icon">
-                            <i class="fa fa-home"></i>
-                        </div>
-                        <a href="#" class="small-box-footer">Voir plus <i class="fa fa-arrow-circle-right"></i></a>
-                    </div>
+                        <!-- /.info-box -->
+                      </div>
+            <div class="col-md-3 col-sm-6 col-xs-12" style="float: left;position:relative;left:1">
+                <div class="info-box">
+                  <span class="info-box-icon bg-green"><i class="fa fa-tint"></i></span>
+      
+                  <div class="info-box-content">
+                    <span class="info-box-text">Branchements sociaux</span>
+                    <span class="info-box-number" id="countBranch">Chargement ..</span>
+                    <a id="lnk_bsociaux_download" style="position:absolute;top:5em;display:none;" href="#" download="somedata.xls" onclick="return ExcellentExport.excel(this, 'tableRealizationPrint', 'Données des realisations');" class="small-box-footer">Télécharger <i class="fa fa-download"></i></a>
+                    <a id="lnk_bsociaux" style="position:absolute;top:5em;display:none;" href="/plugs/bsociaux" class="small-box-footer">Voir plus <i class="fa fa-arrow-circle-right"></i></a>
+                  </div>
+                  <!-- /.info-box-content -->
                 </div>
-                <!-- ./col -->
-                <div class="col-lg-3 col-xs-6">
-                    <!-- small box -->
-                    <div class="small-box bg-green">
-                        <div class="inner">
-                            <h3 id="percentRea" style="font-weight: lighter;">Chargement ..</h3>
+                <!-- /.info-box -->
+              </div>
 
-                            <p><span id="countRealized" style="font-weight: bold;"></span> <br/>
-                                Branchements réalisés
-                            </p>
-
-                        </div>
-                        <div class="icon">
-                            <i class="fa fa-check-circle"></i>
-                        </div>
-                        <a href="/viewtables/realized" class="small-box-footer">Voir plus <i class="fa fa-arrow-circle-right"></i></a>
-                    </div>
+              <div class="col-md-3 col-sm-6 col-xs-12" style="float: left;position:relative;left:1">
+                <div class="info-box">
+                  <span class="info-box-icon bg-yellow"><i class="fa fa-wrench"></i></span>
+      
+                  <div class="info-box-content">
+                    <span class="info-box-text">Pose compteur</span>
+                    <span class="info-box-number" id="countPoseCompteur">Chargement ..</span>
+                    <a id="lnk_pcompt_download" style="position:absolute;top:5em;display:none;" href="#" download="somedata.xls" onclick="return ExcellentExport.excel(this, 'tableRealizationPrint', 'Données des realisations');" class="small-box-footer">Télécharger <i class="fa fa-download"></i></a>
+                    <a id="lnk_pcompt" style="position:absolute;top:5em;display:none;" href="/plugs/pcompt" class="small-box-footer">Voir plus <i class="fa fa-arrow-circle-right"></i></a>
+                  </div>
+                  <!-- /.info-box-content -->
                 </div>
-                <!-- ./col -->
-                <div class="col-lg-3 col-xs-6">
-                    <!-- small box -->
-                    <div class="small-box bg-yellow">
-                        <div class="inner">
-                            <h3 id="percentErr" style="font-weight: lighter;">Chargement ..</h3>
+                <!-- /.info-box -->
+              </div>
 
-                            <p><span id="countError" style="font-weight: bold;"></span> <br/>
-                                Branchements avec clé érroné
-                            </p>
-                        </div>
-                        <div class="icon">
-                            <i class="fa fa-trash"></i>
-                        </div>
-                        <a href="/viewtables/errors" class="small-box-footer">Voir plus <i class="fa fa-arrow-circle-right"></i></a>
-                    </div>
+              <div class="col-md-3 col-sm-6 col-xs-12" style="float: left;position:relative;left:1">
+                <div class="info-box">
+                  <span class="info-box-icon bg-purple"><i class="fa fa-check"></i></span>
+      
+                  <div class="info-box-content">
+                    <span class="info-box-text">Total branchement</span>
+                    <span class="info-box-number" id="countTotal">Chargement ..</span>
+                    <a style="position:absolute;top:5em;" href="/viewkoborealized" class="small-box-footer">Voir plus <i class="fa fa-arrow-circle-right"></i></a>
+                  </div>
+                  <!-- /.info-box-content -->
                 </div>
-                <!-- ./col -->
-                <div class="col-lg-3 col-xs-6">
-                    <!-- small box -->
-                    <div class="small-box bg-red">
-                        <div class="inner">
-                            <h3 id="percentRep" style="font-weight: lighter;">Chargement ..</h3>
-
-                            <p><span id="countRepProgress" style="font-weight: bold;"></span>
-                                <br/>Branchements non réalisés
-                            </p>
-                        </div>
-                        <div class="icon">
-                            <i class="fa fa-hourglass-half"></i>
-                        </div>
-                        <a href="/viewtables/tasks" class="small-box-footer">Voir plus <i class="fa fa-arrow-circle-right"></i></a>
-                    </div>
-                </div>
-                <!-- ./col -->
-            </div>
-            <!-- /.row -->
-            <!-- Main row -->
-
-            <!-- /.row (main row) -->
+                <!-- /.info-box -->
+              </div>
+        <!-- ./col -->
+    </div>
 
             <div class="row" style="padding-left: 1.5em;">
                 <section class="content">
-                    <div class="row">
-                        <div class="col-md-6">
-
-                            <!-- /.box -->
-
-                            <div class="box">
-                                <div class="box-header">
-                                    <h3 class="box-title">Synthèse des branchements réalisés et réceptionnés par agent contrôleur</h3>
-                                </div>
-                                <!-- /.box-header -->
-                                <div class="box-body no-padding">
-                                    <table id="dataTablesContractors" class="table table-bordered table-striped">
-                                    <thead>
-                                    <tr style="font-weight:bold;font-size:16px;">
-                                        <td>Nom du controlleur</td>
-                                        <td>Progression</td>
-                                        <td style="width: 40px">Validation</td>
-                                    </tr>
-                                    </thead>
-                                        <tbody></tbody>
-                                        <tfoot>
-                                        <tr style="font-weight:bold;font-size:16px;">
-                                            <td>Nom du controlleur</td>
-                                            <td>Progression</td>
-                                            <td style="width: 40px">Validation</td>
-                                        </tr>
-                                        </tfoot>
-                                    </table>
-                                </div>
-                                <!-- /.box-body -->
-                            </div>
-                            <!-- /.box -->
-                        </div>
-                        <!-- /.col -->
-                        <div class="col-md-6">
-                            <div class="box">
-                                <div class="box-header">
-                                    <h3 class="box-title">Synthèse des branchements avec clé érroné par entreprise</h3>
-                                </div>
-                                <!-- /.box-header -->
-                                <div class="box-body no-padding">
-                                    <table id="dataTablesContractorErrors" class="table table-bordered table-striped">
-                                        <thead>
-                                        <tr style="font-weight:bold;font-size:16px;">
-                                            <td>Nom du controlleur</td>
-                                            <td>Progression</td>
-                                            <td style="width: 40px">Validation</td>
-                                        </tr>
-
-                                        </thead>
-
-                                        <tbody>
-
-                                        </tbody>
-                                    <tfoot>
-                                    <tr style="font-weight:bold;font-size:16px;">
-                                        <td>Nom du controlleur</td>
-                                        <td>Progression</td>
-                                        <td style="width: 40px">Validation</td>
-                                    </tr>
-                                    </tfoot>
-                                    </table>
-                                </div>
-                                <!-- /.box-body -->
-                            </div>
-                        </div>
-                        <!-- /.col -->
-                    </div>
                     <!-- /.row -->
+
                     <div class="row">
+                     
+                        <div class="col-xs-12">
+                            <div class="box">
+                          
+                                <div class="box-header">
+                                    <h3 class="box-title" style="font-weight:lighter;">Données des {{typeplug}}</h3>
+                                    
+                                    <div class="box-body table-responsive no-padding">
+                                        <table id="tableRealization" class="table  table table-bordered table-hover">
+                                            <thead>
+                                            <tr>
+                                                <th>N° Client</th>
+                                                <!--  <th>Secteur</th> -->
+                                                <th>Nom Client</th>
+                                                <th>Lot</th>
+                                                <th>Controlleur</th>
+                                                <th>Entreprise</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody></tbody>
+                                        </table>
+                                    </div>
+                                    <!-- /.box-body -->
+                                </div>
+                                <!-- /.box -->
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="row" style="display: none;">
                         <div class="col-xs-12">
                             <div class="box">
                                 <div class="box-header">
-                                    <h3 class="box-title">Synthèse des parcellés référencées par agent contrôleur</h3>
-
-                                <!-- /.box-header -->
-                                <div class="box-body table-responsive no-padding">
-                                    <table id="tableReferencement" class="table  table table-bordered table-hover">
-                                        <thead>
+                                    <h3 class="box-title" style="font-weight:lighter;">Données des branchements</h3>
+                                    <div class="box-body table-responsive no-padding">
+                                        <table id="tableRealizationPrint" class="table  table table-bordered table-hover">
+                                            <thead>
                                             <tr>
-                                                <th>Nom du controlleur</th>
-                                              <!--  <th>Secteur</th> -->
-                                                <th>Progression</th>
-                                                <th>Réalisé</th>
+                                                <th>N° Client</th>
+                                                <!--  <th>Secteur</th> -->
+                                                <th>Nom Client</th>
                                                 <th>Lot</th>
-
+                                                <th>Controlleur</th>
+                                                <th>Entreprise</th>
                                             </tr>
-                                        </thead>
-                                        <tbody></tbody>
-                                        <tfoot>
-
-                                        <tr>
-                                            <th>Nom du controlleur</th>
-                                         <!--   <th>Secteur</th> -->
-                                            <th>Progression</th>
-                                            <th>Réalisé</th>
-                                            <th>Lot</th>
-
-                                        </tr>
-                                        </tfoot>
-                                    </table>
+                                            </thead>
+                                            <tbody></tbody>
+                                        </table>
+                                    </div>
+                                    <!-- /.box-body -->
                                 </div>
-                                <!-- /.box-body -->
+                                <!-- /.box -->
                             </div>
-                            <!-- /.box -->
                         </div>
-                    </div>
                     </div>
                 </section>
 
@@ -421,7 +360,8 @@
 <!-- AdminLTE for demo purposes -->
 <script src="/dist/js/demo.js"></script>
 <script src="/dist/js/angular.min.js"></script>
-<script src="/dist/js/performance.js"></script>
+<script src="/dist/js/pivotTablesPlugs.js"></script>
+<script src="/dist/js/excellentexport.js"></script>
 <script>
     $(function () {
         $('#example1').DataTable()

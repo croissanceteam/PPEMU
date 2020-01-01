@@ -48,7 +48,7 @@ $scope.lots=[
         var ctrReaGraph=0;
         var ctrErrGraph=0;
         $scope.fillDataSet=function(labelDatas,ref,rea,error,donutRep,donutRea,donutErr){
-
+            console.log("donutRep is :",donutRep)
             $(function () {
                 /* ChartJS
                  * -------

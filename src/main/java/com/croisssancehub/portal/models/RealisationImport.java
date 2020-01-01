@@ -73,6 +73,8 @@ public class RealisationImport implements java.io.Serializable{
 
     @Column(name="lot")
     private int lot;
+    @Column(name="secteur")
+    private String secteur;
 
     @Column(name="date_export")
     private String DateExport;
@@ -95,7 +97,7 @@ public class RealisationImport implements java.io.Serializable{
     public RealisationImport(int id, String commune, String address, String avenue, String numHome, String phone,
 			String town, String typeBranche, String waterGiven, String entreprise, String consultant, String geopoint,
 			Double lat, Double lng, Double altitude, Double precision, String comments, String submission_time, int lot,
-			String dateExport, String refClient, String client, String issue, Boolean clean, String idKobo) {
+			String dateExport, String refClient, String client, String issue, Boolean clean, String idKobo,String secteur) {
 		super();
 		this.id = id;
 		this.commune = commune;
@@ -121,7 +123,8 @@ public class RealisationImport implements java.io.Serializable{
 		this.client = client;
 		this.issue = issue;
 		this.clean = clean;
-		this.idKobo = idKobo;
+        this.idKobo = idKobo;
+        this.secteur=secteur;
 	}
  
 	public String getIssue() {
@@ -316,6 +319,14 @@ public class RealisationImport implements java.io.Serializable{
 
     public int getLot() {
         return lot;
+    }
+
+    public void setSecteur(String secteur) {
+        this.secteur = secteur;
+    }
+
+    public String getSecteur() {
+        return secteur;
     }
 
     public void setLot(int lot) {

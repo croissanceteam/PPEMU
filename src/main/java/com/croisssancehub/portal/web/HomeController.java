@@ -44,6 +44,11 @@ public class HomeController {
         return "pages/chart";
     }
 
+    @GetMapping(value={"/plugs/appropriation","/plugs/bsociaux","/plugs/pcompt"})
+    public String viewTypePlugs(){
+        return "pages/pivotTables-type-plugs";
+    }
+
     @GetMapping("/viewtables/{name}")
     public String tablesView(@PathVariable String name){
         String viewpage="index";

@@ -7,6 +7,7 @@ import com.croisssancehub.portal.models.RealisationImport;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
 
 /**
  * RealisationImportRepository
@@ -27,5 +28,11 @@ public interface RealisationImportRepository extends CrudRepository<RealisationI
 
     @Query("select rea.consultant as consultant, count(rea) as stats from RealisationImport rea group by rea.consultant")
     List<Map<String,Object>> getWorkByController();
+
+    @Query("select count(rea) as stats, lot as lot,LOWER(typeBranche) as typeBranche from RealisationImport rea group by rea.lot,rea.typeBranche")
+    List<Map<String,Object>> getDataByTypeJoin();
+
+    @Query("select rea.refClient as refClient,rea.client as client,rea.town as town,rea.entreprise as entreprise,rea.consultant as consultant,rea.lot as lot from RealisationImport rea where rea.typeBranche=:plug")
+    List<Map<String,Object>> getDataByTypePlugs(@Param("plug") String plug);
     
 }

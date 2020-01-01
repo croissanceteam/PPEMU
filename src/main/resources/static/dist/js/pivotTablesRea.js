@@ -74,15 +74,64 @@ app.controller('dashboard',function ($scope,$http) {
             alert('Connexion is bad')
         }
     })
+    $scope.synthesisDataDash=function(URL,callback){
+        $http.get(URL).then(function(result){
+            let arrayType=['appropriation_','branchement_so','pose_compteur'];
+            let approCtr=0;
+            let branchsoCtr=0;
+            let pose_compteurCtr=0;
+   
+            let data=result.data;
+               data.forEach(e=>{
+                   if (e.typeBranche=='appropriation_') {
+                       approCtr+=e.stats;
+                   }
+                   if (e.typeBranche=='branchement_so') {
+                       branchsoCtr+=e.stats
+                   }
+                   if (e.typeBranche=='pose_compteur') {
+                       pose_compteurCtr+=e.stats;
+                   }
+               })
+               let synthesisElement={
+                   appropriation:approCtr,
+                   branchement_so:branchsoCtr,
+                   pose_compteur:pose_compteurCtr
+               }
+   
+            $scope.list=result.data;
+           console.log('Count Appro :',synthesisElement.appropriation)
+           console.log('Count Branch :',synthesisElement.branchement_so)
+           console.log('Count pose :',synthesisElement.pose_compteur)
+           callback({
+               status:true,
+               appro:synthesisElement.appropriation,
+               brnch:synthesisElement.branchement_so,
+               poscmptr:synthesisElement.pose_compteur
+           });
+        },function(error){
+           callback({status:false});
+        })
+      }
+      $scope.synthesisDataDash('/api/kobotoolbox/datajoin',function(response){
+        if (response.status==true) {
+             document.querySelector('#countAppro').innerHTML=response.appro;
+             document.querySelector('#countBranch').innerHTML=response.brnch;
+             document.querySelector('#countPoseCompteur').innerHTML=response.poscmptr;
+             document.querySelector('#countTotal').innerHTML=(
+                 response.appro+response.brnch+response.poscmptr
+             );
+             //document.querySelector('#cover-spin').style="display:none;";
+        } else {
+           //document.querySelector('#cover-spin').style="display:none;";
+           alert("Connexion error")
+        }
+    })
    $scope.synthesisData=function(URL,callback){
      $http.get(URL).then(function(result){
          $scope.list=result.data;
-        console.log('Count RepBASE :',$scope.list.reperage.length)
-        console.log('Count ReaBASE :',$scope.list.realized.length)
         callback({
             status:true,
-            ref:$scope.list.reperage.length,
-            rea:$scope.list.realized.length,
             data:$scope.list.realized
         });
      },function(error){
@@ -91,13 +140,12 @@ app.controller('dashboard',function ($scope,$http) {
    }
    $scope.synthesisData('/api/kobotoolbox/refs',function(response){
        if (response.status==true) {
-            document.querySelector('#countReperage').innerHTML=response.ref;
-            document.querySelector('#countRealized').innerHTML=response.rea;
             console.log("Data Printable :",response.data)
-            document.querySelector('#cover-spin').style="display:none;";
+            
             $(function () {
                 $('#tableRealization').DataTable({
                     data:response.data,
+                    processing: true,
                     columns: [
                        // { data: "sector" },
                          { "mData":null,
@@ -196,6 +244,7 @@ app.controller('dashboard',function ($scope,$http) {
                     'loading'     : true
                 })
             })
+            document.querySelector('#cover-spin').style="display:none;";
        } else {
           document.querySelector('#cover-spin').style="display:none;";
           alert("Connexion error")
