@@ -84,8 +84,8 @@ app.controller('dashboard',function ($scope,$http) {
         var PieData        = [
             {
                 value    : appro,
-                color    : '#f56954',
-                highlight: '#f56954',
+                color    : '#00BFFF',
+                highlight: '#00BFFF',
                 label    : 'APPROPRIATIONS'
             },
             {
@@ -96,8 +96,8 @@ app.controller('dashboard',function ($scope,$http) {
             },
             {
                 value    : pcmpt,
-                color    : '#f39c12',
-                highlight: '#f39c12',
+                color    : '#FFA500',
+                highlight: '#FFA500',
                 label    : 'POSE COMPTEURS'
             }
         ]

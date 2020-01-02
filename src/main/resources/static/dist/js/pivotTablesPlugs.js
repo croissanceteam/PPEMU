@@ -167,6 +167,12 @@ app.controller('dashboard',function ($scope,$http) {
         "mRender":function(data){
              return data.entreprise;
           }
+   },
+   { "mData":null,
+        "bSortable":false,
+        "mRender":function(data){
+             return data.secteur;
+          }
    }
     
          
@@ -217,6 +223,12 @@ app.controller('dashboard',function ($scope,$http) {
         "bSortable":false,
         "mRender":function(data){
              return data.entreprise;
+          }
+   },
+   { "mData":null,
+        "bSortable":false,
+        "mRender":function(data){
+             return data.secteur;
           }
    }
     

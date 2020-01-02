@@ -14,7 +14,7 @@ import org.springframework.data.repository.query.Param;
  */ 
 public interface RealisationImportRepository extends CrudRepository<RealisationImport,Long>{
 
-    @Query("select rea.refClient as refClient, rea.client as client, rea.entreprise as entreprise, rea.consultant as consultant, rea.lot as lot, rea.submission_time as submission_time, rea.lat as latitude,rea.lng as longitude from RealisationImport rea")
+    @Query("select rea.refClient as refClient, rea.client as client, rea.entreprise as entreprise, rea.consultant as consultant, rea.lot as lot, rea.submission_time as submission_time, rea.lat as latitude,rea.lng as longitude,rea.secteur as secteur from RealisationImport rea")
     List<Map<String,Object>> getHomeWorkDo();
 
     @Query("select rea.lot as lot,COUNT(rea) as stats from RealisationImport rea group by rea.lot")
@@ -32,7 +32,7 @@ public interface RealisationImportRepository extends CrudRepository<RealisationI
     @Query("select count(rea) as stats, lot as lot,LOWER(typeBranche) as typeBranche from RealisationImport rea group by rea.lot,rea.typeBranche")
     List<Map<String,Object>> getDataByTypeJoin();
 
-    @Query("select rea.refClient as refClient,rea.client as client,rea.town as town,rea.entreprise as entreprise,rea.consultant as consultant,rea.lot as lot from RealisationImport rea where rea.typeBranche=:plug")
+    @Query("select rea.refClient as refClient,rea.client as client,rea.town as town,rea.entreprise as entreprise,rea.consultant as consultant,rea.lot as lot,rea.secteur as secteur from RealisationImport rea where rea.typeBranche=:plug")
     List<Map<String,Object>> getDataByTypePlugs(@Param("plug") String plug);
     
 }

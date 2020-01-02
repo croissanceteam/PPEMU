@@ -35,6 +35,14 @@ public class ApiRawData {
         return map;
 
     }
+
+    @GetMapping("readata")
+    public Map<String,List<Map<String,Object>>> getsRealized(){
+        Map<String,List<Map<String,Object>>>map=new HashMap();
+        map.put("realized",realisationImportRepository.getHomeWorkDo());
+        return map;
+
+    }
     @GetMapping("realizedlot")
     public List<Map<String,Object>> getRealizationByLot(){
         return realisationImportRepository.getRealizationsByLot();
