@@ -20,7 +20,7 @@ app.controller('dashboard',function ($scope,$http) {
         ];
         jjmmyy=dateToChange.split('-');
         month=parseInt(jjmmyy[1]);
-        return jjmmyy[2]+' '+months[month]+' '+jjmmyy[0];
+        return jjmmyy[2]+' '+months[month-1]+' '+jjmmyy[0];
     }
 
     document.body.style.zoom = "80%";
