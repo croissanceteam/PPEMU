@@ -1,6 +1,6 @@
 var app=angular.module("app",[]);
 var get_param_url=window.location.href.split('/')[4];
-var URL="http://obspemu.org:9898/mobile/api.php?date=true";
+var URL="/api/realized/whenupdate";
 
 app.controller('dashboard',function ($scope,$http) {
     $scope.linkDecoration=function(param){
@@ -57,13 +57,34 @@ app.controller('dashboard',function ($scope,$http) {
     }
     document.body.style.zoom = "80%";
     $scope.lastupdate;
+    $scope.formatDate=function(dateToChange){
+        var months=[
+            'Janvier',
+            'Février',
+            'Mars',
+            'Avril',
+            'Mai',
+            'Juin',
+            'Juillet',
+            'Août',
+            'Septembre',
+            'Octobre',
+            'Novembre',
+            'Decembre'
+        ];
+        jjmmyy=dateToChange.split('-');
+        month=parseInt(jjmmyy[1]);
+        return jjmmyy[2]+' '+months[month]+' '+jjmmyy[0];
+    }
+
+    document.body.style.zoom = "80%";
+    $scope.lastupdate;
    $http.get(URL).then(function(response){
-        $scope.lastupdate=response.data.updated;
-        console.log('Last Updated :',response.data)
+        $scope.lastupdate=$scope.formatDate(response.data.dt2);
+        console.log('Last Updated :',response.data.dt2)
     },function(error){
         console.error("Date Error :",error)
     });
-
     $scope.synthesisDataDash=function(URL,callback){
         $http.get(URL).then(function(result){
             let arrayType=['appropriation_','branchement_so','pose_compteur'];
