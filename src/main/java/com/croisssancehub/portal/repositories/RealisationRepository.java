@@ -114,4 +114,8 @@ public interface RealisationRepository extends JpaRepository<Realisation,Long> {
          "where rep.refClient not in (select rea.refClient from Realisation rea) " +
          "group by rep.town,rep.lot")
  List<Map<String,Object>> todoLotAndTownReperageGroupingDefault();
+
+ @Query(" select substring(rea.DateExport,1,10) as dt2 from RealisationImport rea where rea.id=(select max(r.id) as dt from RealisationImport r)")
+ Map<String,Object> getDateUpDate();
+
 }

@@ -154,6 +154,9 @@ public class ApiRealisation {
         return realisationRepository.doneWorkErrorRealizedByEntreprise();
     }
 
-
+    @GetMapping("whenupdate")
+    public Map<String,Object> actualUpDate(){
+        return realisationRepository.getDateUpDate();
+    }
 
 }
